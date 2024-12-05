@@ -1,0 +1,40 @@
+name: msf
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  fl_chart: ^0.69.0
+  google_fonts: ^6.2.1
+  auto_size_text: ^3.0.0
+  flutter_octicons: ^1.45.0
+  carousel_slider_plus: ^7.0.1
+  web_socket_channel: ^3.0.1
+  get: ^4.6.6
+  platform:
+  dart_jsonwebtoken:
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - img/a_1.jpg
+    - img/a_2.jpg
+    - img/a_3.jpg
+    - assets/config.json
+
+
