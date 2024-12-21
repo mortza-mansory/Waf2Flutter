@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msf/controllers/dashboard/RecentActivityController.dart';
+
 class AttacksPerApplicationTable extends StatelessWidget {
   const AttacksPerApplicationTable({
-    Key? key,
+    super.key,
     required Color secondryColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onSecondary,
           borderRadius: BorderRadius.circular(10),
@@ -34,7 +35,7 @@ class AttacksPerApplicationTable extends StatelessWidget {
                   columnSpacing: 40,
                   horizontalMargin: 0,
                   columns: [
-                    DataColumn(label: Text("#")),
+                    const DataColumn(label: Text("#")),
                     DataColumn(label: Text("Application".tr)),
                     DataColumn(label: Text("Critical".tr)),
                     DataColumn(label: Text("Warning".tr)),
@@ -42,7 +43,8 @@ class AttacksPerApplicationTable extends StatelessWidget {
                     DataColumn(label: Text("Errors".tr)),
                     DataColumn(label: Text("Requests".tr)),
                   ],
-                  rows: recentActivityController.recentActivities.map((activity) {
+                  rows:
+                      recentActivityController.recentActivities.map((activity) {
                     return DataRow(cells: [
                       DataCell(Text(activity.id.toString())),
                       DataCell(Text(Uri.parse(activity.app).host)),

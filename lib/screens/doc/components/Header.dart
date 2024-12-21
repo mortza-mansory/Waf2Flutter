@@ -10,7 +10,7 @@ class Header extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Menu_Controller menuController = Get.find<Menu_Controller>();
 
-  Header({required this.scaffoldKey});
+  Header({super.key, required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
@@ -30,30 +30,31 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 1 : 2),
-        Spacer(),
+        const Spacer(),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             Get.toNamed("/home");
           },
           child: Container(
               width: 100,
               height: 40,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: secondryColor),
+                  borderRadius: BorderRadius.circular(10),
+                  color: secondryColor),
               child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  Icon(Icons.arrow_back_ios_sharp),
-                  SizedBox(width: 6,),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Icon(Icons.arrow_back_ios_sharp),
+                  const SizedBox(
+                    width: 6,
+                  ),
                   Text(
                     "Back".tr,
                   ),
                 ]),
               )),
         ),
-        SizedBox(width: 10),
-
+        const SizedBox(width: 10),
       ],
     );
   }
@@ -64,11 +65,11 @@ class Header extends StatelessWidget {
         backgroundColor: secondryColor,
         title: Text(
           "Logout".tr,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         content: Text(
           "Are you sure you want to logout?".tr,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         actions: [
           TextButton(
@@ -77,7 +78,7 @@ class Header extends StatelessWidget {
             },
             child: Text(
               "Cancel".tr,
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
           TextButton(

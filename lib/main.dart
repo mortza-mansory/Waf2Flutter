@@ -5,9 +5,11 @@ import 'package:msf/controllers/settings/ThemeController.dart';
 import 'package:msf/screens/HomeScreen.dart';
 import 'package:msf/screens/LoginScreen.dart';
 import 'package:msf/screens/SettingScreen.dart';
-import 'package:msf/screens/WebSiteScreen.dart';
+
 import 'package:msf/screens/doc/doc.dart';
 import 'package:msf/screens/login/OtpScreen.dart';
+import 'package:msf/screens/websites/add_website_view.dart';
+import 'package:msf/screens/websites/websites_view.dart';
 import 'package:msf/services/unit/api/config/Config.dart';
 import 'package:msf/utills/theme.dart';
 import 'package:msf/utills/translator.dart';
@@ -20,6 +22,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -32,19 +36,20 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(name: '/l', page: () => LoginScreen()),
           GetPage(name: '/home', page: () => HomeScreen()),
-          GetPage(name: '/websites', page: () => Websitescreen()),
+          GetPage(name: '/websites', page: () => WebsitesView()),
+          GetPage(name: '/add_websites', page: () => AddWebsiteView()),
           GetPage(name: '/setting', page: () => Settingscreen()),
           GetPage(name: '/otp', page: () => OtpScreen()),
           GetPage(name: '/doc', page: () => DocScreen()),
         ],
         navigatorObservers: [
-          GetObserver((_){
-     print('User route: ${Get.currentRoute}');
-      })
+          GetObserver((_) {
+            print('User route: ${Get.currentRoute}');
+          })
         ],
         initialRoute: '/l',
         title: 'ModSec Admin Panel'.tr,
-        theme: getTheme(isDark), 
+        theme: getTheme(isDark),
       );
     });
   }

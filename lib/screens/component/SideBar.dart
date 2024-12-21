@@ -29,16 +29,30 @@ class SideBar extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
-            ListTile(
-              onTap: () {
-                Get.toNamed("/websites");
-              },
+            ExpansionTile(
               leading: const Icon(Icons.web, color: Colors.white60),
-              title: AutoSizeText(
-                "Websites".tr,
-                maxLines: 1,
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
+              title: Text("Websites".tr),
+              children: <Widget>[
+                ListTile(
+                  onTap: () {
+                    Get.toNamed("/websites");
+                  },
+                  title: AutoSizeText(
+                    "Websites".tr,
+                    maxLines: 1,
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+                ListTile(
+                  onTap: () => Get.toNamed("/add_websites"),
+                  leading: const Icon(Icons.add, color: Colors.white60),
+                  title: AutoSizeText(
+                    "Add Website".tr,
+                    maxLines: 1,
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+              ],
             ),
             ListTile(
               onTap: () {
@@ -60,6 +74,7 @@ class SideBar extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
+
             ListTile(
               onTap: () {},
               leading: const Icon(Icons.padding, color: Colors.white60),
@@ -70,15 +85,17 @@ class SideBar extends StatelessWidget {
               ),
             ),
             //Spacer?
-            SizedBox(height: 500,),
+            const SizedBox(
+              height: 500,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: AutoSizeText(
                     "Dark Mode".tr,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 Obx(() {
@@ -93,23 +110,24 @@ class SideBar extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 20), 
+            const SizedBox(height: 20),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: AutoSizeText(
                     "فارسی".tr,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 Obx(() {
                   return Switch(
-                    value: Get.find<TranslateController>().isEnglish.value, 
+                    value: Get.find<TranslateController>().isEnglish.value,
                     onChanged: (value) {
-                      Get.find<TranslateController>().changeLang(value ? 'en' : 'fa');
+                      Get.find<TranslateController>()
+                          .changeLang(value ? 'en' : 'fa');
                     },
                     activeColor: Theme.of(context).primaryColor,
                   );

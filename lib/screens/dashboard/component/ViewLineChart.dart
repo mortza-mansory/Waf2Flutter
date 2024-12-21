@@ -4,7 +4,7 @@ import '../../../utills/colorconfig.dart';
 import 'package:get/get.dart';
 
 class ViewLineChart extends StatefulWidget {
-  const ViewLineChart({Key? key}) : super(key: key);
+  const ViewLineChart({super.key});
 
   @override
   _ViewLineChartState createState() => _ViewLineChartState();
@@ -19,10 +19,10 @@ class _ViewLineChartState extends State<ViewLineChart> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: LineChart(
         LineChartData(
-          gridData: FlGridData(show: false),
+          gridData: const FlGridData(show: false),
           titlesData: FlTitlesData(
             show: true,
             bottomTitles: AxisTitles(
@@ -32,25 +32,32 @@ class _ViewLineChartState extends State<ViewLineChart> {
                 getTitlesWidget: (value, meta) {
                   switch (value.toInt()) {
                     case 0:
-                      return Text('Sun'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Sun'.tr,
+                          style: const TextStyle(color: Colors.white));
                     case 4:
-                      return Text('Mon'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Mon'.tr,
+                          style: const TextStyle(color: Colors.white));
                     case 7:
-                      return Text('Tue'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Tue'.tr,
+                          style: const TextStyle(color: Colors.white));
                     case 10:
-                      return Text('Wed'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Wed'.tr,
+                          style: const TextStyle(color: Colors.white));
                     case 13:
-                      return Text('Thu'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Thu'.tr,
+                          style: const TextStyle(color: Colors.white));
                     case 16:
-                      return Text('Fri'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Fri'.tr,
+                          style: const TextStyle(color: Colors.white));
                     case 19:
-                      return Text('Sat'.tr, style: TextStyle(color: Colors.white));
+                      return Text('Sat'.tr,
+                          style: const TextStyle(color: Colors.white));
                   }
                   return Container();
                 },
               ),
             ),
-            leftTitles: AxisTitles(
+            leftTitles: const AxisTitles(
               sideTitles: SideTitles(showTitles: false),
             ),
           ),
@@ -62,23 +69,24 @@ class _ViewLineChartState extends State<ViewLineChart> {
           lineBarsData: [
             LineChartBarData(
               spots: [
-                FlSpot(0, 3),
-                FlSpot(4, 2),
-                FlSpot(9, 4),
-                FlSpot(12, 3),
-                FlSpot(15, 5),
-                FlSpot(18, 3),
-                FlSpot(20, 4),
+                const FlSpot(0, 3),
+                const FlSpot(4, 2),
+                const FlSpot(9, 4),
+                const FlSpot(12, 3),
+                const FlSpot(15, 5),
+                const FlSpot(18, 3),
+                const FlSpot(20, 4),
               ],
               isCurved: true,
               color: primaryColor,
               barWidth: 5,
               isStrokeCapRound: true,
-              dotData: FlDotData(show: false),
+              dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
                 gradient: LinearGradient(
-                  colors: gradientColors.map((e) => e.withOpacity(0.3)).toList(),
+                  colors:
+                      gradientColors.map((e) => e.withOpacity(0.3)).toList(),
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),

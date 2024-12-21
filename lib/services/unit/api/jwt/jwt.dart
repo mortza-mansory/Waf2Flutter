@@ -1,9 +1,7 @@
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
-
-void decodeJWT(String token)
-{
-  final publicKeyPem = '''
+void decodeJWT(String token) {
+  const publicKeyPem = '''
 -----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlbG+6SU9zFPIWgwaLJEI
 IUP2kPiQ309St5zZ9CwOPnBPD5Jx2gTiPxo9N6Vo1uj9Mi/BDyNKr2kzII7P5I7j
@@ -14,13 +12,12 @@ LTmIw6Sdj7ED6B5jPTOdwYvCY1kwPyDfyqcxpDXchKkwJjcTvQ6PgraqySRXH78u
 BwIDAQAB
 -----END PUBLIC KEY-----
 ''';
-  try{
+  try {
     final publicKey = RSAPublicKey(publicKeyPem);
     final jwt = JWT.verify(token, publicKey);
 
     print("Token is valid and the payload is ${jwt.payload}");
-  }catch(e)
-  {
+  } catch (e) {
     print("E: Can't verify the JWT");
   }
 }

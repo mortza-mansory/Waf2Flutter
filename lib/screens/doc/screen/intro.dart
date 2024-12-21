@@ -16,15 +16,15 @@ class IntroScreen extends StatelessWidget {
           children: [
             Header(scaffoldKey: scaffoldKey),
             const SizedBox(height: 16),
-            Column(
+            const Column(
               children: [
-              Text("Welcome to the ModSecurity Admin Panel!"),
-                Text("In this docs you will learn how to use properly this Panel"),
+                Text("Welcome to the ModSecurity Admin Panel!"),
+                Text(
+                    "In this docs you will learn how to use properly this Panel"),
                 Text("So! Lets get started with basics!"),
-                
-                Text("As you know this admin panel on top of CRS OWSAP the ModSecurity engine."),
+                Text(
+                    "As you know this admin panel on top of CRS OWSAP the ModSecurity engine."),
                 Text("With this engine we can ")
-
               ],
             ),
           ],

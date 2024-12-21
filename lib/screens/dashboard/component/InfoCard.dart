@@ -11,7 +11,8 @@ class InfoCards extends StatelessWidget {
   final int percentage;
   final Object totalStorage;
 
-  InfoCards({
+  const InfoCards({
+    super.key,
     required this.icon,
     required this.title,
     required this.color,
@@ -23,7 +24,7 @@ class InfoCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: secondryColor,
         borderRadius: BorderRadius.circular(10),
@@ -47,7 +48,7 @@ class InfoCards extends StatelessWidget {
                   color: color,
                 ),
               ),
-              Icon(Icons.more_vert_sharp),
+              const Icon(Icons.more_vert_sharp),
             ],
           ),
           AutoSizeText(
@@ -63,13 +64,13 @@ class InfoCards extends StatelessWidget {
             children: [
               Text(
                 "$numOfFiles Files".tr,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white70,
                 ),
               ),
               Text(
                 totalStorage.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white70,
                 ),
               ),

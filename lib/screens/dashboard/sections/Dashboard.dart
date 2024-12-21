@@ -8,9 +8,11 @@ import 'package:msf/screens/dashboard/sections/StatusSection.dart';
 import 'package:msf/utills/responsive.dart';
 
 class Dashboard extends StatelessWidget {
+  const Dashboard({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Row(
@@ -28,20 +30,20 @@ class Dashboard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Responsive(
                     mobile: InfoCardGridView(
-                      crossAxisCount: _size.width < 650 ? 2 : 4,
-                      childAspectRatio: _size.width < 650 ? 1.3 : 1,
+                      crossAxisCount: size.width < 650 ? 2 : 4,
+                      childAspectRatio: size.width < 650 ? 1.3 : 1,
                     ),
                     tablet: InfoCardGridView(),
                     desktop: InfoCardGridView(
-                      childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+                      childAspectRatio: size.width < 1400 ? 1.1 : 1.4,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 14,
                   ),
                   Responsive(
@@ -59,38 +61,38 @@ class Dashboard extends StatelessWidget {
                     ),
                   ),
                   if (Responsive.isMobile(context))
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16),
                       child: StatusSection(),
                     ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             if (!Responsive.isMobile(context))
-              Expanded(
+              const Expanded(
                 flex: 2,
                 child: StatusSection(),
               ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Responsive(
+        const Responsive(
           mobile: Viewers(),
           tablet: Viewers(),
           desktop: Viewers(),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
-        Responsive(
+        const Responsive(
           mobile: EndSection(),
           tablet: EndSection(),
           desktop: EndSection(),

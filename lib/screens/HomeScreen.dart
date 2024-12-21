@@ -12,6 +12,8 @@ class HomeScreen extends StatelessWidget {
   final Menu_Controller menuController = Get.find<Menu_Controller>();
   final WsController comController = Get.find<WsController>();
 
+  HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,16 +24,16 @@ class HomeScreen extends StatelessWidget {
         key: scaffoldKey,
         drawer: !Responsive.isDesktop(context)
             ? const Drawer(
-          child: SideBar(),
-        )
+                child: SideBar(),
+              )
             : null,
         body: Obx(() {
           if (comController.isLoading.value) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (!comController.isConnected.value) {
-            return Center(
+            return const Center(
               child: Text("Failed to connect to WebSocket"),
             );
           } else {
@@ -50,7 +52,6 @@ class HomeScreen extends StatelessWidget {
             );
           }
         }),
-
       ),
     );
   }

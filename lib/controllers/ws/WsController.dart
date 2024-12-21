@@ -9,7 +9,6 @@ import '../../services/unit/api/HttpService.dart';
 import '../dashboard/ResourceUsageController.dart';
 
 class WsController extends GetxController {
-
   final Com api = Com(
     httpService: HttpService(),
     webSocketService: WebSocketService(),
@@ -28,7 +27,6 @@ class WsController extends GetxController {
         _startPeriodicStatusCheck();
       }
     });
-
   }
 
   Future<void> connectWebSocket() async {
@@ -95,7 +93,7 @@ class WsController extends GetxController {
       print("Sent message: $encodedMessage");
     } else {
       print('WebSocket is not connected. Retrying in 1 second...');
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       if (isConnected.value) {
         api.sendMessageOverSocket(encodedMessage);
       } else {
@@ -106,7 +104,7 @@ class WsController extends GetxController {
   }
 
   void _startPeriodicStatusCheck() {
-    _statusCheckTimer = Timer.periodic(Duration(seconds: 10), (timer) {
+    _statusCheckTimer = Timer.periodic(const Duration(seconds: 10), (timer) {
       if (isConnected.value) {
         sendMessage("start_system_info", messageType: 'system_info');
       } else {
@@ -119,13 +117,14 @@ class WsController extends GetxController {
     if (!Get.isDialogOpen!) {
       Get.dialog(
         AlertDialog(
-          title: Text("Connection Lost"),
-          content: Column(
+          title: const Text("Connection Lost"),
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 20),
-              Text("Connection to the server was lost. Please refresh the page."),
+              Text(
+                  "Connection to the server was lost. Please refresh the page."),
             ],
           ),
           actions: [
@@ -134,7 +133,7 @@ class WsController extends GetxController {
                 // Close the dialog
                 Get.back();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ),

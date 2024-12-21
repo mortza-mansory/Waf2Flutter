@@ -10,6 +10,8 @@ class DocScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final Menu_Controller menuController = Get.find<Menu_Controller>();
 
+  DocScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,8 +22,8 @@ class DocScreen extends StatelessWidget {
             key: scaffoldKey,
             drawer: !Responsive.isDesktop(context)
                 ? const Drawer(
-              child: SideBar(),
-            )
+                    child: SideBar(),
+                  )
                 : null,
             body: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +37,6 @@ class DocScreen extends StatelessWidget {
                   child: IntroScreen(scaffoldKey: scaffoldKey),
                 ),
               ],
-            )
-        ));
+            )));
   }
 }

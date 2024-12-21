@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 
-class Counter extends GetxController{
-
-  final RxInt _time = RxInt(15*60); 
+class Counter extends GetxController {
+  final RxInt _time = RxInt(15 * 60);
 
   String get remainingSec {
     int minutes = _time.value ~/ 60;
@@ -11,9 +10,9 @@ class Counter extends GetxController{
   }
 
   void _countdown() {
-    if(_time.value > 0) {
-      _time.value--;  
-      Future.delayed(Duration(seconds: 1), _countdown);
+    if (_time.value > 0) {
+      _time.value--;
+      Future.delayed(const Duration(seconds: 1), _countdown);
     }
   }
 
@@ -22,5 +21,4 @@ class Counter extends GetxController{
     super.onInit();
     _countdown();
   }
-
 }

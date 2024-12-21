@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:msf/screens/dashboard/component/CircleChar.dart';
 import 'package:get/get.dart';
 import 'package:msf/utills/colorconfig.dart';
+
 class StatusSection extends StatelessWidget {
   const StatusSection({
     super.key,
@@ -11,32 +12,30 @@ class StatusSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: secondryColor,
-            borderRadius: BorderRadius.circular(10)),
+            color: secondryColor, borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               "Status".tr,
-              style: TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             //the chart
             CircleChart(),
-        //The list of info
-            SizedBox(
+            //The list of info
+            const SizedBox(
               height: 30,
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
@@ -46,9 +45,9 @@ class StatusSection extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.visibility_outlined,
+                  const Icon(Icons.visibility_outlined,
                       color: Colors.blueAccent),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   AutoSizeText(
@@ -56,21 +55,19 @@ class StatusSection extends StatelessWidget {
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  AutoSizeText(
+                  const AutoSizeText(
                     "143000",
                     maxLines: 1,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontSize: 12),
+                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 12),
                   ),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
@@ -80,31 +77,29 @@ class StatusSection extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.wifi_protected_setup_rounded,
+                  const Icon(Icons.wifi_protected_setup_rounded,
                       color: Colors.greenAccent),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   AutoSizeText(
                     "Last refresh: ".tr,
                     maxLines: 2,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
-                  AutoSizeText(
+                  const AutoSizeText(
                     "2 min ",
                     maxLines: 1,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontSize: 12),
+                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 12),
                   ),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
@@ -114,9 +109,9 @@ class StatusSection extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.supervised_user_circle_outlined,
+                  const Icon(Icons.supervised_user_circle_outlined,
                       color: Colors.yellowAccent),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   AutoSizeText(
@@ -124,21 +119,19 @@ class StatusSection extends StatelessWidget {
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  AutoSizeText(
+                  const AutoSizeText(
                     "4",
                     maxLines: 1,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontSize: 12),
+                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 12),
                   ),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
@@ -148,9 +141,8 @@ class StatusSection extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.shield_outlined,
-                      color: Colors.redAccent),
-                  SizedBox(
+                  const Icon(Icons.shield_outlined, color: Colors.redAccent),
+                  const SizedBox(
                     width: 10,
                   ),
                   AutoSizeText(
@@ -158,12 +150,10 @@ class StatusSection extends StatelessWidget {
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  AutoSizeText(
+                  const AutoSizeText(
                     "1",
                     maxLines: 1,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontSize: 12),
+                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 12),
                   ),
                 ],
               ),
@@ -172,4 +162,3 @@ class StatusSection extends StatelessWidget {
         ));
   }
 }
-

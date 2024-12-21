@@ -5,7 +5,7 @@ import 'package:msf/utills/colorconfig.dart';
 ThemeData getTheme(bool isDark) {
   return isDark
       ? ThemeData.light().copyWith(
-          colorScheme: ColorScheme.light(
+          colorScheme: const ColorScheme.light(
             primary: Colors.blueAccent,
             secondary: Colors.yellowAccent,
             onSecondary: secondryColor,
@@ -13,7 +13,7 @@ ThemeData getTheme(bool isDark) {
             surface: Colors.blue,
           ),
           scaffoldBackgroundColor: bgColorW,
-          drawerTheme: DrawerThemeData(
+          drawerTheme: const DrawerThemeData(
             backgroundColor: bgDrawer,
           ),
           canvasColor: Colors.white,
@@ -22,18 +22,18 @@ ThemeData getTheme(bool isDark) {
               ThemeData.light().textTheme.apply(bodyColor: Colors.black)),
         )
       : ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.dark(
+          colorScheme: const ColorScheme.dark(
             primary: Colors.blueAccent,
             secondary: Colors.yellowAccent,
             tertiary: Colors.blueGrey,
             onSecondary: secondryColor,
             surface: Colors.blue,
           ),
-          scaffoldBackgroundColor: Color.fromARGB(255, 31, 30, 45),
-          drawerTheme: DrawerThemeData(
+          scaffoldBackgroundColor: const Color.fromARGB(255, 31, 30, 45),
+          drawerTheme: const DrawerThemeData(
             backgroundColor: secondryColor,
           ),
-          canvasColor: Color(0xFF2A2D3E),
+          canvasColor: const Color(0xFF2A2D3E),
           primaryColor: Colors.white,
           textTheme: GoogleFonts.poppinsTextTheme(
               ThemeData.dark().textTheme.apply(bodyColor: Colors.white)),

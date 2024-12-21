@@ -8,6 +8,8 @@ class OtpScreen extends StatelessWidget {
   final TextEditingController otpController = TextEditingController();
   final LoginController loginController = Get.find<LoginController>();
 
+  OtpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -16,9 +18,13 @@ class OtpScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          width: Responsive.isDesktop(context) ? screenWidth * 0.5 : screenWidth * 0.9,
-          height: Responsive.isDesktop(context) ? screenHeight * 0.5 : screenHeight * 0.7,
-          padding: EdgeInsets.all(20),
+          width: Responsive.isDesktop(context)
+              ? screenWidth * 0.5
+              : screenWidth * 0.9,
+          height: Responsive.isDesktop(context)
+              ? screenHeight * 0.5
+              : screenHeight * 0.7,
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: secondryColor.withOpacity(0.3),
             borderRadius: BorderRadius.circular(12),
@@ -26,26 +32,26 @@ class OtpScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Enter OTP",
                 style: TextStyle(fontSize: 30),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 "Please enter the OTP sent to your device".tr,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
-              Container(
+              const SizedBox(height: 20),
+              SizedBox(
                 width: screenWidth * 0.8,
                 child: TextField(
                   controller: otpController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "OTP",
                     fillColor: secondryColor,
                     filled: true,
-                    border: const OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
@@ -53,7 +59,7 @@ class OtpScreen extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor.withOpacity(0.4),
@@ -61,7 +67,9 @@ class OtpScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   minimumSize: Size(
-                    Responsive.isDesktop(context) ? screenWidth * 0.3 : screenWidth * 0.8,
+                    Responsive.isDesktop(context)
+                        ? screenWidth * 0.3
+                        : screenWidth * 0.8,
                     50,
                   ),
                 ),
@@ -73,14 +81,14 @@ class OtpScreen extends StatelessWidget {
                     Get.snackbar(
                       "Error",
                       "Please enter a valid OTP",
-                      icon: Icon(Icons.error, color: Colors.red),
+                      icon: const Icon(Icons.error, color: Colors.red),
                       backgroundColor: Colors.white,
                       maxWidth: 360,
                       isDismissible: true,
                     );
                   }
                 },
-                child: Text(
+                child: const Text(
                   'Verify OTP',
                   style: TextStyle(
                     color: Colors.white,

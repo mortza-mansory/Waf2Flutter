@@ -10,7 +10,7 @@ class Header extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Menu_Controller menuController = Get.find<Menu_Controller>();
 
-  Header({required this.scaffoldKey});
+  Header({super.key, required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
@@ -30,29 +30,31 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 1 : 2),
-        Spacer(),
+        const Spacer(),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             Get.toNamed("/doc");
           },
           child: Container(
               width: 100,
               height: 40,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: secondryColor),
+                  borderRadius: BorderRadius.circular(10),
+                  color: secondryColor),
               child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  Icon(Icons.help),
-                  SizedBox(width: 6,),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Icon(Icons.help),
+                  const SizedBox(
+                    width: 6,
+                  ),
                   Text(
                     "doc".tr,
                   ),
                 ]),
               )),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Container(
           width: 200,
           height: 40,
@@ -68,52 +70,65 @@ class Header extends StatelessWidget {
             },
           ),
         ),
-        Container(
-          height: 40,
-          margin: const EdgeInsets.only(left: 16),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 16 / 2,
-          ),
-          decoration: BoxDecoration(
-            color: secondryColor,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.white12),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.account_circle, size: 26),
-
-              const Text("test"),
-              SizedBox(width: 5,),
-              PopupMenuButton<String>(
-                color: secondryColor,
-                onSelected: (value) {
-                  if (value == 'logout'.tr) {
-                    _showLogoutConfirmation();
-                  }
-                },
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem<String>(
-                      value: 'profile'.tr,
-                      child: Text('Profile'.tr),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'settings'.tr,
-                      child: Text('Settings'.tr),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'logout'.tr,
-                      child: Text('Logout'.tr),
-                    ),
-                  ];
-                },
-                icon: const Icon(Icons.arrow_drop_down_rounded),
+        const SizedBox(width: 10),
+        PopupMenuButton<String>(
+          color: secondryColor,
+          onSelected: (value) {
+            if (value == 'logout'.tr) {
+              _showLogoutConfirmation();
+            }
+          },
+          padding: EdgeInsets.zero,
+          itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem<String>(
+                value: 'profile',
+                child: Text('Profile'.tr),
               ),
-            ],
+              PopupMenuItem<String>(
+                value: 'settings',
+                child: Text('Settings'.tr),
+              ),
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Text('Logout'.tr),
+              ),
+            ];
+          },
+          child: Container(
+            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: secondryColor,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.white12),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.account_circle,
+                  size: 20,
+                  color: Colors.white,
+                ),
+                const SizedBox(width: 8),
+                AutoSizeText(
+                  "test",
+                  maxLines: 1,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
-        ),
+        )
       ],
     );
   }
@@ -124,11 +139,11 @@ class Header extends StatelessWidget {
         backgroundColor: secondryColor,
         title: Text(
           "Logout".tr,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         content: Text(
           "Are you sure you want to logout?".tr,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         actions: [
           TextButton(
@@ -137,7 +152,7 @@ class Header extends StatelessWidget {
             },
             child: Text(
               "Cancel".tr,
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
           TextButton(

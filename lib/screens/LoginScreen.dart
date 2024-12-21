@@ -12,6 +12,8 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController captchaInputController = TextEditingController();
   final CaptchaController captchaController = Get.find<CaptchaController>();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +30,8 @@ class LoginScreen extends StatelessWidget {
                     ? screenHeight * 0.7
                     : screenHeight * 0.9,
                 margin: Responsive.isDesktop(context)
-                    ? EdgeInsets.fromLTRB(200, 0, 200, 0)
-                    : EdgeInsets.all(0),
+                    ? const EdgeInsets.fromLTRB(200, 0, 200, 0)
+                    : const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   color: secondryColor.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(12),
@@ -52,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                                 padEnds: false,
                                 enableInfiniteScroll: false,
                                 autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
+                                    const Duration(milliseconds: 800),
                                 viewportFraction: 1.0,
                               ),
                               items: [
@@ -69,76 +71,76 @@ class LoginScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Welcome to WAF2Flutter!",
                                 style: TextStyle(fontSize: 30),
                               ),
-                              SizedBox(height: 20),
-                              Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 "          Login        ",
                                 style: TextStyle(fontSize: 20),
                               ),
-                              SizedBox(height: 20),
-                              Container(
+                              const SizedBox(height: 20),
+                              SizedBox(
                                 width: Responsive.isDesktop(context)
                                     ? screenWidth * 0.4
                                     : screenWidth * 0.8,
                                 height: 60,
                                 child: TextField(
                                   controller: usernameController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     hintText: "Username",
                                     fillColor: secondryColor,
                                     filled: true,
-                                    border: const OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20),
-                              Container(
+                              const SizedBox(height: 20),
+                              SizedBox(
                                 width: Responsive.isDesktop(context)
                                     ? screenWidth * 0.4
                                     : screenWidth * 0.8,
                                 height: 60,
                                 child: TextField(
                                   controller: passwordController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     hintText: "Password",
                                     fillColor: secondryColor,
                                     filled: true,
-                                    border: const OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Obx(() => Text(
-                                "${captchaController.captcha.value}",
-                                style: TextStyle(fontSize: 24),
-                              )),
-                              SizedBox(height: 20),
-                              Container(
+                                    captchaController.captcha.value,
+                                    style: const TextStyle(fontSize: 24),
+                                  )),
+                              const SizedBox(height: 20),
+                              SizedBox(
                                 width: Responsive.isDesktop(context)
                                     ? screenWidth * 0.4
                                     : screenWidth * 0.8,
                                 height: 60,
                                 child: TextField(
                                   controller: captchaInputController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     hintText: "Enter Captcha",
                                     fillColor: secondryColor,
                                     filled: true,
-                                    border: const OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                     ),
                                   ),
                                   onChanged: (value) {
@@ -146,54 +148,53 @@ class LoginScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Obx(
-                                    () => Get.find<LoginController>()
-                                    .loginProcess
-                                    .value
-                                    ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                                    : ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                    primaryColor.withOpacity(0.4),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(8),
-                                    ),
-                                    minimumSize: Size(
-                                      Responsive.isDesktop(context)
-                                          ? screenWidth * 0.2
-                                          : screenWidth * 0.8,
-                                      50,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    if (!Get.find<LoginController>()
+                                () => Get.find<LoginController>()
                                         .loginProcess
-                                        .value) {
-                                      if (captchaController
-                                          .isCaptchaCorrect.value) {
-                                        Get.find<LoginController>()
-                                            .login(
-                                          usernameController.text,
-                                          passwordController.text,
-                                        );
-                                      } else {
-                                        Get.snackbar("Error",
-                                            "Captcha is incorrect!");
-                                      }
-                                    }
-                                  },
-                                  child: Text(
-                                    'Login',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
+                                        .value
+                                    ? const Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              primaryColor.withOpacity(0.4),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          minimumSize: Size(
+                                            Responsive.isDesktop(context)
+                                                ? screenWidth * 0.2
+                                                : screenWidth * 0.8,
+                                            50,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          if (!Get.find<LoginController>()
+                                              .loginProcess
+                                              .value) {
+                                            if (captchaController
+                                                .isCaptchaCorrect.value) {
+                                              Get.find<LoginController>().login(
+                                                usernameController.text,
+                                                passwordController.text,
+                                              );
+                                            } else {
+                                              Get.snackbar("Error",
+                                                  "Captcha is incorrect!");
+                                            }
+                                          }
+                                        },
+                                        child: const Text(
+                                          'Login',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
                               ),
                             ],
                           ),
@@ -203,7 +204,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Text("Demo Login method using pre defined username and pass")
+              const Text(
+                  "Demo Login method using pre defined username and pass")
             ],
           );
         },

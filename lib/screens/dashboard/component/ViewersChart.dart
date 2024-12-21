@@ -4,14 +4,14 @@ import 'package:msf/screens/dashboard/component/ViewLineChart.dart';
 import 'package:msf/utills/colorconfig.dart';
 
 class Viewers extends StatelessWidget {
-  const Viewers({Key? key}) : super(key: key);
+  const Viewers({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 350, 
-      padding: EdgeInsets.all(16),
+      height: 350,
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: secondryColor,
         borderRadius: BorderRadius.circular(10),
@@ -21,13 +21,13 @@ class Viewers extends StatelessWidget {
         children: [
           Text(
             'Viewers'.tr,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
               fontSize: 15,
             ),
           ),
-          Expanded(
+          const Expanded(
             child: ViewLineChart(),
           )
         ],

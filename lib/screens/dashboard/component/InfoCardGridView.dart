@@ -9,12 +9,13 @@ class InfoCardGridView extends StatelessWidget {
   final double childAspectRatio;
 
   InfoCardGridView({
-    Key? key,
+    super.key,
     this.crossAxisCount = 4,
     this.childAspectRatio = 1.2,
-  }) : super(key: key);
+  });
 
-  final ResourceUsageController dataController = Get.put(ResourceUsageController());
+  final ResourceUsageController dataController =
+      Get.put(ResourceUsageController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class InfoCardGridView extends StatelessWidget {
 
     return GridView(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: 16,
@@ -38,49 +39,55 @@ class InfoCardGridView extends StatelessWidget {
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: OctIcons.cpu_24,
-            title: "CPU Usage".tr,
-            color: Theme.of(context).colorScheme.primary,
-            numOfFiles: dataController.resourceUsage.value.cpuFiles ?? 0,
-            percentage: dataController.resourceUsage.value.cpuUsage ?? 0,
-            totalStorage: dataController.resourceUsage.value.cpuUsage ?? "0%",
-          )),
+                icon: OctIcons.cpu_24,
+                title: "CPU Usage".tr,
+                color: Theme.of(context).colorScheme.primary,
+                numOfFiles: dataController.resourceUsage.value.cpuFiles ?? 0,
+                percentage: dataController.resourceUsage.value.cpuUsage ?? 0,
+                totalStorage:
+                    dataController.resourceUsage.value.cpuUsage ?? "0%",
+              )),
         ),
         SizedBox(
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: OctIcons.cloud_24,
-            title: "Cloud Usage".tr,
-            color: Theme.of(context).colorScheme.secondary,
-            numOfFiles: dataController.resourceUsage.value.cloudFiles ?? 0,
-            percentage: dataController.resourceUsage.value.cloudUsage ?? 0,
-            totalStorage: dataController.resourceUsage.value.cloudStorage ?? "0 MB",
-          )),
+                icon: OctIcons.cloud_24,
+                title: "Cloud Usage".tr,
+                color: Theme.of(context).colorScheme.secondary,
+                numOfFiles: dataController.resourceUsage.value.cloudFiles ?? 0,
+                percentage: dataController.resourceUsage.value.cloudUsage ?? 0,
+                totalStorage:
+                    dataController.resourceUsage.value.cloudStorage ?? "0 MB",
+              )),
         ),
         SizedBox(
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: Icons.memory_rounded,
-            title: "Memory Usage".tr,
-            color: Theme.of(context).colorScheme.tertiary,
-            numOfFiles: dataController.resourceUsage.value.memoryFiles ?? 0,
-            percentage: dataController.resourceUsage.value.memoryUsage ?? 0,
-            totalStorage: dataController.resourceUsage.value.memoryStorage ?? "0 GB",
-          )),
+                icon: Icons.memory_rounded,
+                title: "Memory Usage".tr,
+                color: Theme.of(context).colorScheme.tertiary,
+                numOfFiles: dataController.resourceUsage.value.memoryFiles ?? 0,
+                percentage: dataController.resourceUsage.value.memoryUsage ?? 0,
+                totalStorage:
+                    dataController.resourceUsage.value.memoryStorage ?? "0 GB",
+              )),
         ),
         SizedBox(
           width: cardWidth,
           height: cardHeight,
           child: Obx(() => InfoCards(
-            icon: Icons.traffic_outlined,
-            title: "Traffic Usage".tr,
-            color: Theme.of(context).colorScheme.surface,
-            numOfFiles: dataController.resourceUsage.value.trafficFiles ?? 0,
-            percentage: dataController.resourceUsage.value.trafficUsage ?? 0,
-            totalStorage: dataController.resourceUsage.value.trafficStorage ?? "0 GB",
-          )),
+                icon: Icons.traffic_outlined,
+                title: "Traffic Usage".tr,
+                color: Theme.of(context).colorScheme.surface,
+                numOfFiles:
+                    dataController.resourceUsage.value.trafficFiles ?? 0,
+                percentage:
+                    dataController.resourceUsage.value.trafficUsage ?? 0,
+                totalStorage:
+                    dataController.resourceUsage.value.trafficStorage ?? "0 GB",
+              )),
         ),
       ],
     );

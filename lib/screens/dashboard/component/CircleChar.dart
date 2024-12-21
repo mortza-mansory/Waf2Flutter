@@ -3,6 +3,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:get/get.dart';
 
 class CircleChart extends StatelessWidget {
+  const CircleChart({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
