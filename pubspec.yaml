@@ -35,6 +35,7 @@ flutter:
     - img/a_1.jpg
     - img/a_2.jpg
     - img/a_3.jpg
+    - img/search.png
     - assets/config.json
 
 
