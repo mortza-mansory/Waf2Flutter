@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:msf/bindings/bindings.dart';
+import 'package:msf/core/bindings/bindings.dart';
 import 'package:get/get.dart';
-import 'package:msf/controllers/settings/ThemeController.dart';
-import 'package:msf/screens/HomeScreen.dart';
-import 'package:msf/screens/LoginScreen.dart';
-import 'package:msf/screens/SettingScreen.dart';
+import 'package:msf/core/router/app_router.dart';
+import 'package:msf/features/controllers/settings/ThemeController.dart';
+import 'package:msf/features/home_screen.dart';
+import 'package:msf/features/login/login_screen.dart';
+import 'package:msf/features/setting_screen.dart';
 
-import 'package:msf/screens/doc/doc.dart';
-import 'package:msf/screens/login/OtpScreen.dart';
-import 'package:msf/screens/websites/add_website_view.dart';
-import 'package:msf/screens/websites/websites_view.dart';
-import 'package:msf/services/unit/api/config/Config.dart';
-import 'package:msf/utills/theme.dart';
-import 'package:msf/utills/translator.dart';
+import 'package:msf/features/doc/doc.dart';
+import 'package:msf/features/login/OtpScreen.dart';
+import 'package:msf/features/websites/add_website_screen.dart';
+import 'package:msf/features/websites/websites_screen.dart';
+import 'package:msf/core/services/unit/api/config/Config.dart';
+import 'package:msf/core/utills/theme.dart';
+import 'package:msf/core/utills/translator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Config.loadConfig();
   Get.put(ThemeController());
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,21 +34,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         translations: Translator(),
         initialBinding: MyBindings(),
-        getPages: [
-          GetPage(name: '/l', page: () => LoginScreen()),
-          GetPage(name: '/home', page: () => HomeScreen()),
-          GetPage(name: '/websites', page: () => WebsitesView()),
-          GetPage(name: '/add_websites', page: () => AddWebsiteView()),
-          GetPage(name: '/setting', page: () => Settingscreen()),
-          GetPage(name: '/otp', page: () => OtpScreen()),
-          GetPage(name: '/doc', page: () => DocScreen()),
-        ],
+        getPages: AppRouter.appPages,
         navigatorObservers: [
           GetObserver((_) {
             print('User route: ${Get.currentRoute}');
           })
         ],
-        initialRoute: '/l',
+        initialRoute: AppRouter.loginRoute,
         title: 'ModSec Admin Panel'.tr,
         theme: getTheme(isDark),
       );
