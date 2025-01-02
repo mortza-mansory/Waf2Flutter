@@ -79,8 +79,8 @@ class _DownloadLogState extends State<DownloadLog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Download rotated logs"),
-        SizedBox(height: 20),
+        const Text("Download rotated logs"),
+        const SizedBox(height: 20),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -90,8 +90,8 @@ class _DownloadLogState extends State<DownloadLog> {
                 Expanded(
                   child: Row(
                     children: [
-                      Text("Show"),
-                      SizedBox(width: 5),
+                      const Text("Show"),
+                      const SizedBox(width: 5),
                       Flexible(
                         child: DropdownButton<int>(
                           value: selectedEntries,
@@ -112,16 +112,16 @@ class _DownloadLogState extends State<DownloadLog> {
                           },
                         ),
                       ),
-                      SizedBox(width: 5),
-                      Flexible(child: Text("entries")),
+                      const SizedBox(width: 5),
+                      const Flexible(child: Text("entries")),
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   children: [
-                    Text("Search"),
-                    SizedBox(width: 5),
+                    const Text("Search"),
+                    const SizedBox(width: 5),
                     SizedBox(
                       width: 150,
                       child: DashboardTextfield(
@@ -132,7 +132,7 @@ class _DownloadLogState extends State<DownloadLog> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Sortable DataTable
             DataTable(
@@ -175,7 +175,7 @@ class _DownloadLogState extends State<DownloadLog> {
             ),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         // Footer
         Text(
           "Showing ${displayedData.isNotEmpty ? _startIndex + 1 : 0} to $_endIndex of ${_data.length} entries",

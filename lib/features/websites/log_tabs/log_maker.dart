@@ -3,7 +3,6 @@ import 'package:msf/core/component/widgets/custom_iconbutton.dart';
 
 import 'package:msf/core/component/widgets/dashboard_textfield.dart';
 import 'package:msf/core/utills/colorconfig.dart';
-import 'package:msf/features/websites/components/data_column_tile.dart';
 
 class LogMaker extends StatefulWidget {
   final String title;
@@ -75,7 +74,7 @@ class _LogMakerState extends State<LogMaker> {
             )
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         SizedBox(
           height: 400,
           child: Column(
@@ -87,8 +86,8 @@ class _LogMakerState extends State<LogMaker> {
                   Expanded(
                     child: Row(
                       children: [
-                        Text("Show"),
-                        SizedBox(width: 5),
+                        const Text("Show"),
+                        const SizedBox(width: 5),
                         Flexible(
                           child: DropdownButton<int>(
                             value: selectedEntries,
@@ -109,16 +108,16 @@ class _LogMakerState extends State<LogMaker> {
                             },
                           ),
                         ),
-                        SizedBox(width: 5),
-                        Flexible(child: Text("entries")),
+                        const SizedBox(width: 5),
+                        const Flexible(child: Text("entries")),
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: [
-                      Text("Search"),
-                      SizedBox(width: 5),
+                      const Text("Search"),
+                      const SizedBox(width: 5),
                       SizedBox(
                         width: 150,
                         child: DashboardTextfield(
@@ -129,7 +128,7 @@ class _LogMakerState extends State<LogMaker> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Sortable DataTable
               DataTable(

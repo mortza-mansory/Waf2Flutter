@@ -18,6 +18,7 @@ class DataRowTile {
     required VoidCallback onTapLog,
     required bool status,
     required Function(Status) onModeChanged,
+    required VoidCallback onListenTap,
     required VoidCallback onTapEdit,
     required VoidCallback onTapStart,
     required VoidCallback onTapPause,
@@ -32,7 +33,9 @@ class DataRowTile {
       cells: [
         dataCellMaker(name),
         dataCellMaker(application),
-        dataCellMaker(listenTo),
+
+        DataCell(FittedBox(
+            child: InkWell(onTap: onListenTap, child: Text(listenTo)))),
         dataCellMaker(realWebServer),
 
         DataCell(

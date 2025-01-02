@@ -21,7 +21,7 @@ class _ManualExclusionState extends State<ManualExclusion> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Local rule exclusion",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -61,12 +61,12 @@ class _ManualExclusionState extends State<ManualExclusion> {
           ),
         ),
         const SizedBox(height: 30),
-        Divider(
+        const Divider(
           color: primaryColor,
           thickness: 3,
         ),
         const SizedBox(height: 30),
-        Text("Global Exclusion"),
+        const Text("Global Exclusion"),
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.only(left: 50),

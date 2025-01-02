@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:msf/core/component/Header.dart';
 import 'package:msf/core/component/SideBar.dart';
 import 'package:msf/core/component/widgets/custom_iconbutton.dart';
-import 'package:msf/core/component/widgets/dashboard_textfield.dart';
-import 'package:msf/features/dashboard/component/view_linechart.dart';
 import 'package:msf/core/component/widgets/status_widget.dart';
 import 'package:msf/core/utills/colorconfig.dart';
 import 'package:msf/core/utills/responsive.dart';
@@ -101,7 +99,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
                       title != ""
                           ? Container(
                               width: double.infinity,
-                              margin: EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(bottom: 5),
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
                                 color:
@@ -110,7 +108,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
                               ),
                               child: Text(title),
                             )
-                          : SizedBox.shrink(),
+                          : const SizedBox.shrink(),
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -163,12 +161,12 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
                             ] else if (_selectedTabIndex == 1) ...[
                               attack()
                             ] else if (_selectedTabIndex == 2) ...[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: ManualExclusion(),
                               )
                             ] else if (_selectedTabIndex == 3) ...[
-                              SizedBox(
+                              const SizedBox(
                                 width: double.infinity,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +178,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
                                 ),
                               ),
                             ] else if (_selectedTabIndex == 4) ...[
-                              DownloadLog()
+                              const DownloadLog()
                             ] else if (_selectedTabIndex == 5) ...[
                               LogMaker(title: "Access Logs", logs: sampleData)
                             ] else if (_selectedTabIndex == 6) ...[
@@ -205,19 +203,21 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
   }
 
   Widget summaryTab() {
-    SizedBox betweenSpace() => SizedBox(width: 5);
+    SizedBox betweenSpace() => const SizedBox(width: 5);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Attack Summory"),
-        SizedBox(
+        const Text("Attack Summary"),
+        const SizedBox(
           height: 350,
           width: double.infinity,
-          child: Expanded(child: LogChart()),
+          child:
+              LogChart(), // No need for 'Expanded' here, just put the widget inside a SizedBox
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Use Flexible correctly inside Row or Column
             Flexible(
               child: StatusWidget(
                 title: "Critical: 0",
@@ -250,7 +250,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
               ),
             ),
             betweenSpace(),
-            Flexible(
+            const Flexible(
               child: StatusWidget(
                 title: "Total request: 0",
                 backgrounColor: Colors.white38,
@@ -258,7 +258,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -270,7 +270,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Showing last 1000 audits logs"),
+            const Text("Showing last 1000 audits logs"),
             CustomIconbuttonWidget(
               backColor: primaryColor,
               title: "Reload",

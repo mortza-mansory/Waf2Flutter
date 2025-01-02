@@ -3,14 +3,7 @@ import 'package:msf/core/bindings/bindings.dart';
 import 'package:get/get.dart';
 import 'package:msf/core/router/app_router.dart';
 import 'package:msf/features/controllers/settings/ThemeController.dart';
-import 'package:msf/features/home_screen.dart';
-import 'package:msf/features/login/login_screen.dart';
-import 'package:msf/features/setting_screen.dart';
 
-import 'package:msf/features/doc/doc.dart';
-import 'package:msf/features/login/OtpScreen.dart';
-import 'package:msf/features/websites/add_website_screen.dart';
-import 'package:msf/features/websites/websites_screen.dart';
 import 'package:msf/core/services/unit/api/config/Config.dart';
 import 'package:msf/core/utills/theme.dart';
 import 'package:msf/core/utills/translator.dart';

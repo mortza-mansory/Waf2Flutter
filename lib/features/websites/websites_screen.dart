@@ -147,6 +147,10 @@ class _WebsitesScreenState extends State<WebsitesScreen>
                                             name: 'climber',
                                             application: 'www.climbersoul.cl',
                                             listenTo: '192.168.238.130',
+                                            onListenTap: () => Get.toNamed(
+                                                AppRouter.editWebsiteRoute,
+                                                arguments:
+                                                    'www.climbersoul.cl'),
                                             realWebServer:
                                                 '142.44.241.198=>443',
                                             onTapLog: () => Get.toNamed(

@@ -22,6 +22,7 @@ dependencies:
   get: ^4.6.6
   platform:
   dart_jsonwebtoken:
+  http: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

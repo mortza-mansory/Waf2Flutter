@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../../../core/utills/colorconfig.dart';
-import 'package:get/get.dart';
 
 class LogChart extends StatefulWidget {
   const LogChart({super.key});
@@ -60,7 +59,7 @@ class _LogChartState extends State<LogChart> {
                       value.toInt() < labels.length
                           ? labels[value.toInt()]
                           : "",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.white,
                       ),
@@ -79,15 +78,15 @@ class _LogChartState extends State<LogChart> {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
                       value.toStringAsFixed(1),
-                      style: TextStyle(fontSize: 12, color: Colors.white),
+                      style: const TextStyle(fontSize: 12, color: Colors.white),
                       textAlign: TextAlign.right,
                     ),
                   );
                 },
               ),
             ),
-            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
           // Scatter Points
           scatterSpots: [
@@ -127,7 +126,7 @@ class _LogChartState extends State<LogChart> {
               getTooltipItems: (ScatterSpot touchedSpot) {
                 return ScatterTooltipItem(
                   '(${touchedSpot.x}, ${touchedSpot.y})',
-                  textStyle: TextStyle(color: Colors.white),
+                  textStyle: const TextStyle(color: Colors.white),
                 );
               },
             ),

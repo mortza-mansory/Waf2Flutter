@@ -16,14 +16,14 @@ class SnackbarHelper {
           title: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: Colors.white10,
                   ),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.question_mark,
                   color: Colors.white60,
                   size: 50,
@@ -33,7 +33,7 @@ class SnackbarHelper {
           ),
           content: Text(
             question,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -45,7 +45,7 @@ class SnackbarHelper {
                 snackbarMaker(
                     'Canceled'.tr, 'You have canceled the action.'.tr);
               },
-              child: Text(
+              child: const Text(
                 'Cancel',
                 style: TextStyle(
                   color: Colors.red,
