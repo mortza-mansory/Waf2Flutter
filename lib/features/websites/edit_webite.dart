@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:msf/core/component/Header.dart';
-import 'package:msf/core/component/SideBar.dart';
 import 'package:msf/core/component/page_builder.dart';
 
 import 'package:msf/core/utills/colorconfig.dart';
-import 'package:msf/core/utills/responsive.dart';
-import 'package:msf/features/controllers/settings/IdleController.dart';
+
 import 'package:msf/features/controllers/settings/MenuController.dart';
 import 'package:msf/features/websites/edit_tabs/certificate_tab.dart';
 import 'package:msf/features/websites/edit_tabs/expert_config_tab.dart';

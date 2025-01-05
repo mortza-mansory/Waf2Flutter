@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:msf/core/component/Header.dart';
-import 'package:msf/core/component/SideBar.dart';
 import 'package:msf/core/component/page_builder.dart';
 import 'package:msf/core/component/widgets/custom_dropdown.dart';
 import 'package:msf/core/component/widgets/custom_iconbutton.dart';
 import 'package:msf/core/component/widgets/status_widget.dart';
 import 'package:msf/core/utills/colorconfig.dart';
-import 'package:msf/core/utills/responsive.dart';
-import 'package:msf/features/controllers/settings/IdleController.dart';
+
 import 'package:msf/features/controllers/settings/MenuController.dart';
 import 'package:msf/features/websites/components/data_column_tile.dart';
 import 'package:msf/features/websites/components/log_chart.dart';
@@ -87,11 +84,11 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
                 onPressed: () => Get.back(),
                 icon: Icons.arrow_back,
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               title != "" ? Text(title) : const SizedBox.shrink(),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               CustomDropdownWidget(
-                list: ["log1", "log2"],
+                list: const ["log1", "log2"],
                 value: "log1",
                 onchangeValue: (val) {},
               )
