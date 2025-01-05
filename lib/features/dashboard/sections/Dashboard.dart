@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msf/core/component/EndSection.dart';
-import 'package:msf/features/dashboard/component/AttacksPerApplicationTable.dart';
-import 'package:msf/features/dashboard/component/InfoCardGridView.dart';
-import 'package:msf/features/dashboard/component/ViewersChart.dart';
+import 'package:msf/features/dashboard/component/attacks_perapplication_table.dart';
+import 'package:msf/features/dashboard/component/Info_card_gridview.dart';
+import 'package:msf/features/dashboard/component/viewers_chart.dart';
 import 'package:msf/features/dashboard/sections/StatusSection.dart';
 import 'package:msf/core/utills/responsive.dart';
 

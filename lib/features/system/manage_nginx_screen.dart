@@ -7,31 +7,22 @@ import 'package:msf/features/controllers/settings/MenuController.dart';
 import 'package:msf/core/component/Header.dart';
 import 'package:msf/core/component/SideBar.dart';
 import 'package:msf/core/component/widgets/custom_iconbutton.dart';
-import 'package:msf/core/component/widgets/dashboard_textfield.dart';
+
 import 'package:msf/features/websites/components/data_column_tile.dart';
 import 'package:msf/features/websites/components/data_row_tile.dart';
 import 'package:msf/core/utills/responsive.dart';
 
-class AddWebsiteScreen extends StatefulWidget {
-  const AddWebsiteScreen({super.key});
+class ManageNginxScreen extends StatefulWidget {
+  const ManageNginxScreen({super.key});
 
   @override
-  State<AddWebsiteScreen> createState() => _AddWebsiteScreenState();
+  State<ManageNginxScreen> createState() => _ManageNginxScreenState();
 }
 
-class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
+class _ManageNginxScreenState extends State<ManageNginxScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final Menu_Controller menuController = Get.find<Menu_Controller>();
   final ScrollController scrollbarController = ScrollController();
-  final TextEditingController applicationTextController =
-      TextEditingController();
-  final TextEditingController urlTextController = TextEditingController();
-  @override
-  void dispose() {
-    applicationTextController.dispose();
-    urlTextController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +32,7 @@ class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
           mobile: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              addNewAppSection,
+              nginxActions,
               const SizedBox(width: 10, height: 10),
               pendingAppSection
             ],
@@ -50,7 +41,7 @@ class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(flex: 2, child: addNewAppSection),
+              Expanded(flex: 2, child: nginxActions),
               const SizedBox(width: 10, height: 10),
               Expanded(flex: 3, child: pendingAppSection),
             ],
@@ -59,7 +50,7 @@ class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(flex: 2, child: addNewAppSection),
+              Expanded(flex: 2, child: nginxActions),
               const SizedBox(width: 10, height: 10),
               Expanded(flex: 3, child: pendingAppSection),
             ],
@@ -69,8 +60,7 @@ class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
     );
   }
 
-  Widget get addNewAppSection {
-    final Size size = MediaQuery.of(context).size;
+  Widget get nginxActions {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -81,40 +71,51 @@ class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const AutoSizeText(
-            "Add New Application",
+            "Nginx Actions",
             maxLines: 1,
           ),
           const SizedBox(height: 15),
-          const AutoSizeText(
-            "Application Name",
-            maxLines: 1,
-          ),
-          const SizedBox(height: 5),
-          DashboardTextfield(
-            textEditingController: applicationTextController,
-            hintText: "EX: Customer_name (without space)",
-          ),
-          const SizedBox(height: 10),
-          const AutoSizeText(
-            "Application Url",
-            maxLines: 1,
-          ),
-          const SizedBox(height: 5),
-          DashboardTextfield(
-            textEditingController: applicationTextController,
-            hintText: "www.customer.com",
-          ),
-          const SizedBox(
-            height: 15,
-            width: 15,
-          ),
           SizedBox(
-            width: size.width / 7,
-            child: CustomIconbuttonWidget(
-              icon: Icons.save_outlined,
-              backColor: Colors.blue,
-              title: "Save".tr,
-              onPressed: () {},
+            height: 35,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CustomIconbuttonWidget(
+                  backColor: Colors.yellow[100]!,
+                  iconColor: Colors.yellow[900]!,
+                  titleColor: Colors.yellow[900]!,
+                  title: "Check Confg",
+                  icon: Icons.check,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 5),
+                CustomIconbuttonWidget(
+                  backColor: Colors.blue[100]!,
+                  iconColor: Colors.blue[900]!,
+                  titleColor: Colors.blue[900]!,
+                  title: "Reload",
+                  icon: Icons.autorenew,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 5),
+                CustomIconbuttonWidget(
+                  backColor: Colors.green[100]!,
+                  iconColor: Colors.green[900]!,
+                  titleColor: Colors.green[900]!,
+                  title: "Start Engine",
+                  icon: Icons.play_arrow,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 5),
+                CustomIconbuttonWidget(
+                  backColor: Colors.redAccent[100]!,
+                  iconColor: Colors.red[900]!,
+                  titleColor: Colors.red[900]!,
+                  title: "Stop Engine",
+                  icon: Icons.stop,
+                  onPressed: () {},
+                ),
+              ],
             ),
           )
         ],
@@ -142,7 +143,7 @@ class _AddWebsiteScreenState extends State<AddWebsiteScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const AutoSizeText(
-                      "Applications Pending to preview",
+                      "Nginx Pending to preview",
                       maxLines: 1,
                     ),
                     const SizedBox(height: 10),

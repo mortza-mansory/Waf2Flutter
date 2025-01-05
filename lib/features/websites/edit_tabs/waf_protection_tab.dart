@@ -8,23 +8,17 @@ class WafProtectionTab extends StatelessWidget {
     {
       "ruleName": "REQUEST-901-INITIALIZATION",
       "isEnabled": true,
-      "editAction": () {
-        print("Edit REQUEST-901-INITIALIZATION");
-      }
+      "editAction": () {}
     },
     {
       "ruleName": "REQUEST-902-CUSTOM-RULE",
       "isEnabled": false,
-      "editAction": () {
-        print("Edit REQUEST-902-CUSTOM-RULE");
-      }
+      "editAction": () {}
     },
     {
       "ruleName": "REQUEST-903-OTHER-RULE",
       "isEnabled": true,
-      "editAction": () {
-        print("Edit REQUEST-903-OTHER-RULE");
-      }
+      "editAction": () {}
     },
   ];
 
@@ -106,10 +100,7 @@ class WafProtectionTab extends StatelessWidget {
                         activeColor: Colors.white,
                         inactiveTrackColor: Colors.red,
                         value: data['isEnabled'],
-                        onChanged: (bool value) {
-                          print(
-                              "${data['ruleName']} is now ${value ? 'enabled' : 'disabled'}");
-                        },
+                        onChanged: (bool value) {},
                       ),
                     ),
                     DataCell(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:msf/features/controllers/settings/IdleController.dart';
 import 'package:msf/features/doc/screen/intro.dart';
 import 'package:msf/core/utills/responsive.dart';
-import 'components/SideBar.dart';
+import 'components/sidebar.dart';
 import 'package:msf/features/controllers/settings/MenuController.dart';
 
 class DocScreen extends StatelessWidget {

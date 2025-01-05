@@ -58,37 +58,37 @@ class Header extends StatelessWidget {
     );
   }
 
-  void _showLogoutConfirmation() {
-    Get.dialog(
-      AlertDialog(
-        backgroundColor: secondryColor,
-        title: Text(
-          "Logout".tr,
-          style: const TextStyle(color: Colors.white),
-        ),
-        content: Text(
-          "Are you sure you want to logout?".tr,
-          style: const TextStyle(color: Colors.white),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.back();
-            },
-            child: Text(
-              "Cancel".tr,
-              style: const TextStyle(color: Colors.red),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.back();
-            },
-            child: Text("Confirm".tr),
-          ),
-        ],
-      ),
-      barrierDismissible: true,
-    );
-  }
+  // void _showLogoutConfirmation() {
+  //   Get.dialog(
+  //     AlertDialog(
+  //       backgroundColor: secondryColor,
+  //       title: Text(
+  //         "Logout".tr,
+  //         style: const TextStyle(color: Colors.white),
+  //       ),
+  //       content: Text(
+  //         "Are you sure you want to logout?".tr,
+  //         style: const TextStyle(color: Colors.white),
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () {
+  //             Get.back();
+  //           },
+  //           child: Text(
+  //             "Cancel".tr,
+  //             style: const TextStyle(color: Colors.red),
+  //           ),
+  //         ),
+  //         TextButton(
+  //           onPressed: () {
+  //             Get.back();
+  //           },
+  //           child: Text("Confirm".tr),
+  //         ),
+  //       ],
+  //     ),
+  //     barrierDismissible: true,
+  //   );
+  // }
 }

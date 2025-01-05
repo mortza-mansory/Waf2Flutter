@@ -6,10 +6,10 @@ class LogChart extends StatefulWidget {
   const LogChart({super.key});
 
   @override
-  _LogChartState createState() => _LogChartState();
+  LogChartState createState() => LogChartState();
 }
 
-class _LogChartState extends State<LogChart> {
+class LogChartState extends State<LogChart> {
   List<Color> gradientColors = [
     primaryColor,
     secondryColor,
@@ -85,8 +85,10 @@ class _LogChartState extends State<LogChart> {
                 },
               ),
             ),
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
           // Scatter Points
           scatterSpots: [

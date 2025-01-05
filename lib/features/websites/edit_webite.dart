@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:msf/core/component/Header.dart';
 import 'package:msf/core/component/SideBar.dart';
+import 'package:msf/core/component/page_builder.dart';
 
 import 'package:msf/core/utills/colorconfig.dart';
 import 'package:msf/core/utills/responsive.dart';
@@ -52,146 +53,104 @@ class _EditWebsiteState extends State<EditWebsite>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.find<IdleController>().onUserInteraction();
-      },
-      child: Scaffold(
-        key: scaffoldKey,
-        drawer: !Responsive.isDesktop(context)
-            ? const Drawer(
-                child: SideBar(),
+    return PageBuilder(
+      sectionWidgets: [
+        title != ""
+            ? Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.all(16),
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(title),
               )
-            : null,
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
-              const Expanded(
-                child: SideBar(),
-              ),
-            Expanded(
-              flex: 5,
-              child: SafeArea(
+            : const SizedBox.shrink(),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSecondary,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Scrollbar(
+                controller: scrollbarController,
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Header(scaffoldKey: scaffoldKey),
-                      const SizedBox(height: 16),
-                      title != ""
-                          ? Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.only(bottom: 5),
-                              padding: const EdgeInsets.all(16),
-                              alignment: Alignment.centerLeft,
-                              decoration: BoxDecoration(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(title),
-                            )
-                          : const SizedBox.shrink(),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Scrollbar(
-                              controller: scrollbarController,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                controller: scrollbarController,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: TabBar(
-                                    controller: _tabController,
-                                    tabAlignment: TabAlignment.center,
-                                    isScrollable: true,
-                                    indicator: const BoxDecoration(
-                                      border: Border(
-                                        top: BorderSide(
-                                          width: 2,
-                                          color: primaryColor,
-                                        ),
-                                      ),
-                                    ),
-                                    labelColor: Colors.white,
-                                    tabs: [
-                                      tabMaker("WAF Protection", Icons.shield),
-                                      tabMaker("HTTP/HTTPS",
-                                          Icons.display_settings_rounded),
-                                      tabMaker("Certificates", Icons.circle),
-                                      tabMaker("SSL", Icons.lock),
-                                      tabMaker("Rewrite",
-                                          Icons.auto_fix_normal_sharp),
-                                      tabMaker("Expert Configuration",
-                                          Icons.build_circle_outlined),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            // active websites
-                            const SizedBox(height: 16),
-                            if (_selectedTabIndex == 0) ...[
-                              WafProtectionTab()
-                            ] else if (_selectedTabIndex == 1) ...[
-                              const HttpTab()
-                            ] else if (_selectedTabIndex == 2) ...[
-                              const CertificateTab()
-                            ] else if (_selectedTabIndex == 3) ...[
-                              const Text("SSL Parameters"),
-                              const SizedBox(height: 20),
-                              RichText(
-                                text: TextSpan(
-                                  text:
-                                      "You must save the certificate and then ",
-                                  style: TextStyle(
-                                      color: Get.theme.primaryColor,
-                                      fontSize: 14),
-                                  children: [
-                                    TextSpan(
-                                      text: "reload",
-                                      style: TextStyle(
-                                          color: Get.theme.primaryColor,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    TextSpan(
-                                      style: TextStyle(
-                                          color: Get.theme.primaryColor,
-                                          fontSize: 14),
-                                      text:
-                                          " this page to modify the SSL Configuration",
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ] else if (_selectedTabIndex == 4) ...[
-                              const RewriteTab()
-                            ] else if (_selectedTabIndex == 5) ...[
-                              const ExpertConfigTab()
-                            ]
-                          ],
+                  scrollDirection: Axis.horizontal,
+                  controller: scrollbarController,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: TabBar(
+                      controller: _tabController,
+                      tabAlignment: TabAlignment.center,
+                      isScrollable: true,
+                      indicator: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: 2,
+                            color: primaryColor,
+                          ),
                         ),
                       ),
-                    ],
+                      labelColor: Colors.white,
+                      tabs: [
+                        tabMaker("WAF Protection", Icons.shield),
+                        tabMaker("HTTP/HTTPS", Icons.display_settings_rounded),
+                        tabMaker("Certificates", Icons.circle),
+                        tabMaker("SSL", Icons.lock),
+                        tabMaker("Rewrite", Icons.auto_fix_normal_sharp),
+                        tabMaker("Expert Configuration",
+                            Icons.build_circle_outlined),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+
+              // active websites
+              const SizedBox(height: 16),
+              if (_selectedTabIndex == 0) ...[
+                WafProtectionTab()
+              ] else if (_selectedTabIndex == 1) ...[
+                const HttpTab()
+              ] else if (_selectedTabIndex == 2) ...[
+                const CertificateTab()
+              ] else if (_selectedTabIndex == 3) ...[
+                const Text("SSL Parameters"),
+                const SizedBox(height: 20),
+                RichText(
+                  text: TextSpan(
+                    text: "You must save the certificate and then ",
+                    style:
+                        TextStyle(color: Get.theme.primaryColor, fontSize: 14),
+                    children: [
+                      TextSpan(
+                        text: "reload",
+                        style: TextStyle(
+                            color: Get.theme.primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        style: TextStyle(
+                            color: Get.theme.primaryColor, fontSize: 14),
+                        text: " this page to modify the SSL Configuration",
+                      ),
+                    ],
+                  ),
+                )
+              ] else if (_selectedTabIndex == 4) ...[
+                const RewriteTab()
+              ] else if (_selectedTabIndex == 5) ...[
+                const ExpertConfigTab()
+              ]
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

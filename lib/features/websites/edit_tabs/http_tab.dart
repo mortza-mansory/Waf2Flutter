@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msf/core/component/widgets/custom_dropdown.dart';
 import 'package:msf/core/component/widgets/custom_iconbutton.dart';
 import 'package:msf/core/component/widgets/dashboard_textfield.dart';
 import 'package:msf/core/component/widgets/status_widget.dart';
@@ -63,18 +64,10 @@ class _HttpTabState extends State<HttpTab> {
                   Container(
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: DropdownButton<String>(
+                    child: CustomDropdownWidget(
+                      list: ipList,
                       value: ipList[0],
-                      hint: const Text("Select IP"),
-                      items: ipList.map((ip) {
-                        return DropdownMenuItem<String>(
-                          value: ip,
-                          child: Text(
-                            ip,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
+                      onchangeValue: (value) {
                         setState(() {
                           selectedIp = value;
                         });

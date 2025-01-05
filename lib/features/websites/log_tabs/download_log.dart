@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msf/core/component/widgets/custom_dropdown.dart';
 
 import 'package:msf/core/component/widgets/dashboard_textfield.dart';
 
@@ -93,25 +94,15 @@ class _DownloadLogState extends State<DownloadLog> {
                       const Text("Show"),
                       const SizedBox(width: 5),
                       Flexible(
-                        child: DropdownButton<int>(
-                          value: selectedEntries,
-                          dropdownColor: Colors.grey[800],
-                          items: entryOptions.map((int value) {
-                            return DropdownMenuItem<int>(
-                              value: value,
-                              child: Text(
-                                value.toString(),
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (newVal) {
-                            setState(() {
-                              if (newVal != null) selectedEntries = newVal;
-                            });
-                          },
-                        ),
-                      ),
+                          child: CustomDropdownWidget(
+                        list: entryOptions,
+                        value: selectedEntries,
+                        onchangeValue: (newVal) {
+                          setState(() {
+                            selectedEntries = newVal;
+                          });
+                        },
+                      )),
                       const SizedBox(width: 5),
                       const Flexible(child: Text("entries")),
                     ],

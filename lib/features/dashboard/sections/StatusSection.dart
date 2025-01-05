@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:msf/features/dashboard/component/CircleChar.dart';
+import 'package:msf/features/dashboard/component/circlechar.dart';
 import 'package:get/get.dart';
 import 'package:msf/core/utills/colorconfig.dart';
 

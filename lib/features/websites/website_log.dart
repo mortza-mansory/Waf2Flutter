@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import 'package:msf/core/component/Header.dart';
 import 'package:msf/core/component/SideBar.dart';
+import 'package:msf/core/component/page_builder.dart';
+import 'package:msf/core/component/widgets/custom_dropdown.dart';
 import 'package:msf/core/component/widgets/custom_iconbutton.dart';
 import 'package:msf/core/component/widgets/status_widget.dart';
 import 'package:msf/core/utills/colorconfig.dart';
@@ -68,137 +70,116 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.find<IdleController>().onUserInteraction();
-      },
-      child: Scaffold(
-        key: scaffoldKey,
-        drawer: !Responsive.isDesktop(context)
-            ? const Drawer(
-                child: SideBar(),
-              )
-            : null,
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
-              const Expanded(
-                child: SideBar(),
+    return PageBuilder(
+      sectionWidgets: [
+        Container(
+          width: double.infinity,
+          margin: const EdgeInsets.only(bottom: 5),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSecondary,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            children: [
+              CustomIconbuttonWidget(
+                backColor: Colors.transparent,
+                onPressed: () => Get.back(),
+                icon: Icons.arrow_back,
               ),
-            Expanded(
-              flex: 5,
-              child: SafeArea(
+              SizedBox(width: 5),
+              title != "" ? Text(title) : const SizedBox.shrink(),
+              SizedBox(width: 15),
+              CustomDropdownWidget(
+                list: ["log1", "log2"],
+                value: "log1",
+                onchangeValue: (val) {},
+              )
+            ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSecondary,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            children: [
+              Scrollbar(
+                controller: scrollbarController,
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Header(scaffoldKey: scaffoldKey),
-                      const SizedBox(height: 16),
-                      title != ""
-                          ? Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.only(bottom: 5),
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(title),
-                            )
-                          : const SizedBox.shrink(),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Scrollbar(
-                              controller: scrollbarController,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                controller: scrollbarController,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: TabBar(
-                                    controller: _tabController,
-                                    tabAlignment: TabAlignment.start,
-                                    isScrollable: true,
-                                    indicator: const BoxDecoration(
-                                      border: Border(
-                                        top: BorderSide(
-                                          width: 2,
-                                          color: primaryColor,
-                                        ),
-                                      ),
-                                    ),
-                                    labelColor: Colors.white,
-                                    tabs: [
-                                      Tab(text: "Summory".tr),
-                                      Tab(text: "Attacks".tr),
-                                      Tab(text: "Manual Exclusion".tr),
-                                      Tab(text: "Rules Excluded".tr),
-                                      Tab(text: "Download Logs".tr),
-                                      Tab(text: "Access Logs".tr),
-                                      Tab(text: "Error Logs".tr),
-                                      Tab(text: "Attack Logs".tr),
-                                      Tab(text: "Debug Logs".tr),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            // active websites
-                            const SizedBox(height: 16),
-                            if (_selectedTabIndex == 0) ...[
-                              summaryTab()
-                            ] else if (_selectedTabIndex == 1) ...[
-                              attack()
-                            ] else if (_selectedTabIndex == 2) ...[
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: ManualExclusion(),
-                              )
-                            ] else if (_selectedTabIndex == 3) ...[
-                              const SizedBox(
-                                width: double.infinity,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Rules Excluded"),
-                                    SizedBox(height: 10),
-                                    Text("There are no Excluded rules"),
-                                  ],
-                                ),
-                              ),
-                            ] else if (_selectedTabIndex == 4) ...[
-                              const DownloadLog()
-                            ] else if (_selectedTabIndex == 5) ...[
-                              LogMaker(title: "Access Logs", logs: sampleData)
-                            ] else if (_selectedTabIndex == 6) ...[
-                              LogMaker(title: "Error Logs", logs: sampleData)
-                            ] else if (_selectedTabIndex == 7) ...[
-                              LogMaker(title: "Attack Logs", logs: sampleData)
-                            ] else if (_selectedTabIndex == 8) ...[
-                              LogMaker(title: "Debug Logs", logs: sampleData)
-                            ]
-                          ],
+                  scrollDirection: Axis.horizontal,
+                  controller: scrollbarController,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: TabBar(
+                      controller: _tabController,
+                      tabAlignment: TabAlignment.start,
+                      isScrollable: true,
+                      indicator: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            width: 2,
+                            color: primaryColor,
+                          ),
                         ),
                       ),
-                    ],
+                      labelColor: Colors.white,
+                      tabs: [
+                        Tab(text: "Summory".tr),
+                        Tab(text: "Attacks".tr),
+                        Tab(text: "Manual Exclusion".tr),
+                        Tab(text: "Rules Excluded".tr),
+                        Tab(text: "Download Logs".tr),
+                        Tab(text: "Access Logs".tr),
+                        Tab(text: "Error Logs".tr),
+                        Tab(text: "Attack Logs".tr),
+                        Tab(text: "Debug Logs".tr),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+
+              // active websites
+              const SizedBox(height: 16),
+              if (_selectedTabIndex == 0) ...[
+                summaryTab()
+              ] else if (_selectedTabIndex == 1) ...[
+                attack()
+              ] else if (_selectedTabIndex == 2) ...[
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ManualExclusion(),
+                )
+              ] else if (_selectedTabIndex == 3) ...[
+                const SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Rules Excluded"),
+                      SizedBox(height: 10),
+                      Text("There are no Excluded rules"),
+                    ],
+                  ),
+                ),
+              ] else if (_selectedTabIndex == 4) ...[
+                const DownloadLog()
+              ] else if (_selectedTabIndex == 5) ...[
+                LogMaker(title: "Access Logs", logs: sampleData)
+              ] else if (_selectedTabIndex == 6) ...[
+                LogMaker(title: "Error Logs", logs: sampleData)
+              ] else if (_selectedTabIndex == 7) ...[
+                LogMaker(title: "Attack Logs", logs: sampleData)
+              ] else if (_selectedTabIndex == 8) ...[
+                LogMaker(title: "Debug Logs", logs: sampleData)
+              ]
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

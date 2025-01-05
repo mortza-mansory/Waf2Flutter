@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/Header.dart';
+import '../components/header.dart';
 
 class IntroScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:get/get.dart';
 import 'package:msf/features/controllers/dashboard/ResourceUsageController.dart';
-import 'package:msf/features/dashboard/component/InfoCard.dart';
+import 'package:msf/features/dashboard/component/infocard.dart';
 
 class InfoCardGridView extends StatelessWidget {
   final int crossAxisCount;
