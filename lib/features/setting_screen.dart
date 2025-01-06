@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msf/core/component/page_builder.dart';
 import 'package:msf/features/controllers/settings/IdleController.dart';
 import 'package:msf/features/websites/websites_screen.dart';
 import 'package:msf/core/utills/responsive.dart';
@@ -14,31 +15,8 @@ class Settingscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.find<IdleController>().onUserInteraction();
-      },
-      child: Scaffold(
-        key: scaffoldKey,
-        drawer: !Responsive.isDesktop(context)
-            ? const Drawer(
-                child: SideBar(),
-              )
-            : null,
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
-              const Expanded(
-                child: SideBar(),
-              ),
-            const Expanded(
-              flex: 5,
-              child: WebsitesScreen(),
-            ),
-          ],
-        ),
-      ),
+    return PageBuilder(
+      sectionWidgets: [],
     );
   }
 }

@@ -14,6 +14,7 @@ class PageBuilder extends StatefulWidget {
 
 class _PageBuilderState extends State<PageBuilder> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final sideBar = const SideBar();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,8 +30,8 @@ class _PageBuilderState extends State<PageBuilder> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              const Expanded(
-                child: SideBar(),
+              Expanded(
+                child: sideBar,
               ),
             Expanded(
               flex: 5,

@@ -45,7 +45,7 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
       "Log": "this is a simple log which you need",
     },
   ];
-
+  List<String> dropData = ["www.climbersoul.cl", "site1", "site2"];
   @override
   void initState() {
     _tabController = TabController(length: 9, vsync: this);
@@ -87,11 +87,18 @@ class _WebsitesLogScreenState extends State<WebsitesLogScreen>
               const SizedBox(width: 5),
               title != "" ? Text(title) : const SizedBox.shrink(),
               const SizedBox(width: 15),
-              CustomDropdownWidget(
-                list: const ["log1", "log2"],
-                value: "log1",
-                onchangeValue: (val) {},
-              )
+              DropdownButton<String>(
+                value: "www.climbersoul.cl",
+                onChanged: (String? value) {},
+                items: dropData
+                    .map<DropdownMenuItem<String>>(
+                        (String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            ))
+                    .toList(),
+                underline: const SizedBox(),
+              ),
             ],
           ),
         ),

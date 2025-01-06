@@ -70,65 +70,65 @@ class Header extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(width: 10),
-        PopupMenuButton<String>(
-          color: secondryColor,
-          onSelected: (value) {
-            if (value == 'logout'.tr) {
-              _showLogoutConfirmation();
-            }
-          },
-          padding: EdgeInsets.zero,
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                value: 'profile',
-                child: Text('Profile'.tr),
-              ),
-              PopupMenuItem<String>(
-                value: 'settings',
-                child: Text('Settings'.tr),
-              ),
-              PopupMenuItem<String>(
-                value: 'logout',
-                child: Text('Logout'.tr),
-              ),
-            ];
-          },
-          child: Container(
-            height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(
-              color: secondryColor,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white12),
-            ),
-            child: const Row(
-              children: [
-                Icon(
-                  Icons.account_circle,
-                  size: 20,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 8),
-                AutoSizeText(
-                  "test",
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(width: 8),
-                Icon(
-                  Icons.arrow_drop_down,
-                  size: 20,
-                  color: Colors.white,
-                ),
-              ],
-            ),
-          ),
-        )
+        //     const SizedBox(width: 10),
+        //     PopupMenuButton<String>(
+        //       color: secondryColor,
+        //       onSelected: (value) {
+        //         if (value == 'logout'.tr) {
+        //           _showLogoutConfirmation();
+        //         }
+        //       },
+        //       padding: EdgeInsets.zero,
+        //       itemBuilder: (BuildContext context) {
+        //         return [
+        //           PopupMenuItem<String>(
+        //             value: 'profile',
+        //             child: Text('Profile'.tr),
+        //           ),
+        //           PopupMenuItem<String>(
+        //             value: 'settings',
+        //             child: Text('Settings'.tr),
+        //           ),
+        //           PopupMenuItem<String>(
+        //             value: 'logout',
+        //             child: Text('Logout'.tr),
+        //           ),
+        //         ];
+        //       },
+        //       child: Container(
+        //         height: 40,
+        //         padding: const EdgeInsets.symmetric(horizontal: 12),
+        //         decoration: BoxDecoration(
+        //           color: secondryColor,
+        //           borderRadius: BorderRadius.circular(10),
+        //           border: Border.all(color: Colors.white12),
+        //         ),
+        //         child: const Row(
+        //           children: [
+        //             Icon(
+        //               Icons.account_circle,
+        //               size: 20,
+        //               color: Colors.white,
+        //             ),
+        //             SizedBox(width: 8),
+        //             AutoSizeText(
+        //               "test",
+        //               maxLines: 1,
+        //               style: TextStyle(
+        //                 color: Colors.white,
+        //                 fontSize: 14,
+        //               ),
+        //             ),
+        //             SizedBox(width: 8),
+        //             Icon(
+        //               Icons.arrow_drop_down,
+        //               size: 20,
+        //               color: Colors.white,
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     )
       ],
     );
   }

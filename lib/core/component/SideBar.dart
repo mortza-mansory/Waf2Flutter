@@ -5,10 +5,23 @@ import 'package:msf/features/controllers/settings/ThemeController.dart';
 import 'package:msf/features/controllers/settings/TranslateController.dart';
 import 'package:get/get.dart';
 
-class SideBar extends StatelessWidget {
+class SideBar extends StatefulWidget {
   const SideBar({
     super.key,
   });
+
+  @override
+  State<SideBar> createState() => _SideBarState();
+}
+
+class _SideBarState extends State<SideBar> {
+  Map<int, bool> expansionTiles = {};
+
+  void toggleExpansion(int index) {
+    setState(() {
+      expansionTiles[index] = !(expansionTiles[index] ?? false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,242 +47,191 @@ class SideBar extends StatelessWidget {
             ExpansionPanelList.radio(
               initialOpenPanelValue: false,
               materialGapSize: 5,
+              elevation: 1,
+              expansionCallback: (panelIndex, isExpanded) {
+                toggleExpansion(panelIndex);
+              },
               children: [
-                ExpansionPanelRadio(
-                  value: 0,
-                  backgroundColor: Get.theme.scaffoldBackgroundColor,
-                  headerBuilder: (context, isExpanded) {
-                    return ListTile(
-                      leading: const Icon(Icons.web, color: Colors.white60),
-                      title: Text("Websites".tr),
-                    );
-                  },
-                  body: Column(
-                    children: <Widget>[
-                      ListTile(
-                        onTap: () {
-                          Get.toNamed("/websites");
-                        },
-                        title: AutoSizeText(
-                          "Websites".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                expansionMaker(
+                  0,
+                  "Websites".tr,
+                  Icons.web,
+                  [
+                    ListTile(
+                      onTap: () {
+                        Get.toNamed("/websites");
+                      },
+                      title: AutoSizeText(
+                        "Websites".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                      ListTile(
-                        onTap: () => Get.toNamed("/add_websites"),
-                        leading: const Icon(Icons.add, color: Colors.white60),
-                        title: AutoSizeText(
-                          "Add Website".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed("/add_websites"),
+                      leading: const Icon(Icons.add, color: Colors.white60),
+                      title: AutoSizeText(
+                        "Add Website".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                ExpansionPanelRadio(
-                  value: 1,
-                  backgroundColor: Get.theme.scaffoldBackgroundColor,
-                  headerBuilder: (context, isExpanded) {
-                    return ListTile(
+                expansionMaker(
+                  1,
+                  "System".tr,
+                  Icons.build,
+                  [
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.manageNginxRoute),
+                      leading: Icon(
+                        Icons.rocket_launch,
+                        size: 20,
+                      ),
+                      title: AutoSizeText(
+                        "Manage Nginx".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.systemRoute),
+                      leading: const Icon(
+                        Icons.route,
+                        color: Colors.white60,
+                        size: 20,
+                      ),
+                      title: AutoSizeText(
+                        "Routes".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.activeConnectionRoute),
+                      leading: const Icon(
+                        Icons.connecting_airports_rounded,
+                        color: Colors.white60,
+                        size: 20,
+                      ),
+                      title: AutoSizeText(
+                        "Active Connections".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Divider(
+                      color: Colors.black12,
+                      thickness: 1,
+                    ),
+                    SizedBox(height: 5),
+                    ListTile(
+                      onTap: () =>
+                          Get.toNamed(AppRouter.generalConfigurationRoute),
+                      leading: const Icon(
+                        Icons.build,
+                        color: Colors.white60,
+                        size: 20,
+                      ),
+                      title: AutoSizeText(
+                        "General Configuration".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.userManagmentRoute),
+                      leading: const Icon(
+                        Icons.person,
+                        color: Colors.white60,
+                        size: 20,
+                      ),
+                      title: AutoSizeText(
+                        "Users".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.mediaRoute),
+                      leading: const Icon(
+                        Icons.star,
+                        color: Colors.white60,
+                        size: 20,
+                      ),
+                      title: AutoSizeText(
+                        "Media".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ],
+                ),
+                expansionMaker(
+                  2,
+                  "Interfaces".tr,
+                  Icons.public,
+                  [
+                    ListTile(
+                      onTap: () {
+                        Get.toNamed(AppRouter.addVirtualipRoute);
+                      },
+                      leading: const Icon(Icons.add, color: Colors.white60),
+                      title: AutoSizeText(
+                        "Add virtual IP".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.manageVirtualipRoute),
                       leading: const Icon(Icons.build, color: Colors.white60),
-                      title: Text("System".tr),
-                    );
-                  },
-                  body: Column(
-                    children: <Widget>[
-                      ListTile(
-                        onTap: () => Get.toNamed(AppRouter.manageNginxRoute),
-                        leading: Icon(
-                          Icons.rocket_launch,
-                          size: 20,
-                        ),
-                        title: AutoSizeText(
-                          "Manage Nginx".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                      title: AutoSizeText(
+                        "List Virtual IPs".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                      ListTile(
-                        onTap: () => Get.toNamed(AppRouter.systemRoute),
-                        leading: const Icon(
-                          Icons.route,
-                          color: Colors.white60,
-                          size: 20,
-                        ),
-                        title: AutoSizeText(
-                          "Routes".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () =>
-                            Get.toNamed(AppRouter.activeConnectionRoute),
-                        leading: const Icon(
-                          Icons.connecting_airports_rounded,
-                          color: Colors.white60,
-                          size: 20,
-                        ),
-                        title: AutoSizeText(
-                          "Active Connections".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Divider(
-                        color: Colors.black12,
-                        thickness: 1,
-                      ),
-                      SizedBox(height: 5),
-                      ListTile(
-                        onTap: () =>
-                            Get.toNamed(AppRouter.generalConfigurationRoute),
-                        leading: const Icon(
-                          Icons.build,
-                          color: Colors.white60,
-                          size: 20,
-                        ),
-                        title: AutoSizeText(
-                          "General Configuration".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () => Get.toNamed(AppRouter.userManagmentRoute),
-                        leading: const Icon(
-                          Icons.person,
-                          color: Colors.white60,
-                          size: 20,
-                        ),
-                        title: AutoSizeText(
-                          "Users".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () => Get.toNamed(AppRouter.mediaRoute),
-                        leading: const Icon(
-                          Icons.star,
-                          color: Colors.white60,
-                          size: 20,
-                        ),
-                        title: AutoSizeText(
-                          "Media".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                ExpansionPanelRadio(
-                  value: 2,
-                  backgroundColor: Get.theme.scaffoldBackgroundColor,
-                  headerBuilder: (context, isExpanded) {
-                    return ListTile(
-                      leading: const Icon(Icons.public, color: Colors.white60),
-                      title: Text("Interfaces".tr),
-                    );
-                  },
-                  body: Column(
-                    children: <Widget>[
-                      ListTile(
-                        onTap: () {
-                          Get.toNamed(AppRouter.addVirtualipRoute);
-                        },
-                        leading: const Icon(Icons.add, color: Colors.white60),
-                        title: AutoSizeText(
-                          "Add virtual IP".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                expansionMaker(
+                  3,
+                  "System Log".tr,
+                  Icons.padding,
+                  [
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.nginxLogRoute),
+                      leading: const Icon(Icons.rocket_launch,
+                          color: Colors.white60),
+                      title: AutoSizeText(
+                        "Nginx Log".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                      ListTile(
-                        onTap: () =>
-                            Get.toNamed(AppRouter.manageVirtualipRoute),
-                        leading: const Icon(Icons.build, color: Colors.white60),
-                        title: AutoSizeText(
-                          "List Virtual IPs".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.userActionLogRoute),
+                      leading: const Icon(Icons.edit, color: Colors.white60),
+                      title: AutoSizeText(
+                        "User Actions Log".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                    ],
-                  ),
-                ),
-                ExpansionPanelRadio(
-                  value: 3,
-                  backgroundColor: Get.theme.scaffoldBackgroundColor,
-                  headerBuilder: (context, isExpanded) {
-                    return ListTile(
-                      leading: const Icon(Icons.padding, color: Colors.white60),
-                      title: Text("System Log".tr),
-                    );
-                  },
-                  body: Column(
-                    children: <Widget>[
-                      ListTile(
-                        onTap: () => Get.toNamed(AppRouter.nginxLogRoute),
-                        leading: const Icon(Icons.rocket_launch,
-                            color: Colors.white60),
-                        title: AutoSizeText(
-                          "Nginx Log".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.internalErrorLogRoute),
+                      leading: const Icon(Icons.close, color: Colors.white60),
+                      title: AutoSizeText(
+                        "Internal Error Logs".tr,
+                        maxLines: 1,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                      ListTile(
-                        onTap: () => Get.toNamed(AppRouter.userActionLogRoute),
-                        leading: const Icon(Icons.edit, color: Colors.white60),
-                        title: AutoSizeText(
-                          "User Actions Log".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      ListTile(
-                        onTap: () =>
-                            Get.toNamed(AppRouter.internalErrorLogRoute),
-                        leading: const Icon(Icons.close, color: Colors.white60),
-                        title: AutoSizeText(
-                          "Internal Error Logs".tr,
-                          maxLines: 1,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
-            ),
-            ListTile(
-              onTap: () {
-                Get.toNamed("/setting");
-              },
-              leading: const Icon(Icons.settings_sharp, color: Colors.white60),
-              title: AutoSizeText(
-                "Settings".tr,
-                maxLines: 1,
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
             ),
             ListTile(
               onTap: () {},
@@ -331,4 +293,22 @@ class SideBar extends StatelessWidget {
       ),
     );
   }
+
+  ExpansionPanelRadio expansionMaker(
+          int index, String title, IconData titleIcon, List<Widget> children) =>
+      ExpansionPanelRadio(
+          value: index,
+          canTapOnHeader: true,
+          backgroundColor: (expansionTiles[index] ?? false)
+              ? Get.theme.scaffoldBackgroundColor
+              : Theme.of(context).drawerTheme.backgroundColor,
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              leading: Icon(titleIcon, color: Colors.white60),
+              title: Text(title),
+            );
+          },
+          body: Column(
+            children: children,
+          ));
 }
