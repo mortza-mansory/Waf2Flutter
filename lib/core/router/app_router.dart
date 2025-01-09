@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
+import 'package:msf/features/dashboard/dashboard_screen.dart';
 import 'package:msf/features/doc/doc.dart';
-import 'package:msf/features/home_screen.dart';
+
 import 'package:msf/features/interface/add_virtualip_screen.dart';
 import 'package:msf/features/interface/manage_virtualip_screen.dart';
 import 'package:msf/features/login/otpscreen.dart';
