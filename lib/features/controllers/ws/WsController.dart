@@ -25,17 +25,21 @@ class WsController extends GetxController {
       if (isSuccess) {
         connectWebSocket();
         _startPeriodicStatusCheck();
+        print("--------------------------its started");
       }
     });
   }
 
   Future<void> connectWebSocket() async {
     isLoading.value = true;
+    print("Attempting to connect WebSocket...");
     bool connected = await api.wsConnect(processIncomingData);
+
     isConnected.value = connected;
     isLoading.value = false;
 
     if (connected) {
+      print("WebSocket connected successfully.");
       sendMessage("start_system_info", messageType: 'system_info');
     } else {
       showDisconnectedDialog();
@@ -44,7 +48,7 @@ class WsController extends GetxController {
   }
 
   void processIncomingData(String message) {
-    print("WebSocket received data: $message");
+   // print("WebSocket received data: $message");
     try {
       Map<String, dynamic> data = jsonDecode(message);
       String messageType = data['type'];
@@ -90,14 +94,15 @@ class WsController extends GetxController {
 
     if (isConnected.value) {
       api.sendMessageOverSocket(encodedMessage);
-      print("Sent message: $encodedMessage");
+  //    print("Sent message: $encodedMessage");
     } else {
       print('WebSocket is not connected. Retrying in 1 second...');
       await Future.delayed(const Duration(seconds: 1));
       if (isConnected.value) {
         api.sendMessageOverSocket(encodedMessage);
+   //     print("Sent message after reconnect: $encodedMessage");
       } else {
-        print("Message was not sent.");
+        print("Failed to send message. WebSocket still not connected.");
         showDisconnectedDialog();
       }
     }
@@ -106,9 +111,11 @@ class WsController extends GetxController {
   void _startPeriodicStatusCheck() {
     _statusCheckTimer = Timer.periodic(const Duration(seconds: 10), (timer) {
       if (isConnected.value) {
+   //     print("---------------------------------------------sending");
         sendMessage("start_system_info", messageType: 'system_info');
       } else {
         timer.cancel();
+    //    print("WebSocket connection lost. Stopping status checks.");
       }
     });
   }

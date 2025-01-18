@@ -41,10 +41,9 @@ class DataRowTile {
         DataCell(
           IconButton(
             icon: Center(
-                child: Image.asset(
-              "img/search.png",
-              width: 25,
-              height: 25,
+                child: Icon(
+              Icons.search_sharp,
+                  size: 25,
             )),
             onPressed: onTapLog,
             padding: EdgeInsets.zero,

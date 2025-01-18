@@ -1,15 +1,14 @@
 import 'package:get/get.dart';
-import 'package:msf/features/dashboard/dashboard_screen.dart';
 import 'package:msf/features/doc/doc.dart';
-
+import 'package:msf/features/home_screen.dart';
 import 'package:msf/features/interface/add_virtualip_screen.dart';
 import 'package:msf/features/interface/manage_virtualip_screen.dart';
 import 'package:msf/features/login/otpscreen.dart';
 import 'package:msf/features/login/login_screen.dart';
 import 'package:msf/features/setting_screen.dart';
+import 'package:msf/features/statistic_screen.dart';
 import 'package:msf/features/system/active_connections_screen.dart';
 import 'package:msf/features/system/general_configuration_screen.dart';
-import 'package:msf/features/system/manage_nginx_screen.dart';
 import 'package:msf/features/system/media_screen.dart';
 import 'package:msf/features/system/routes_screen.dart';
 import 'package:msf/features/system/users/add_user_screen.dart';
@@ -22,14 +21,17 @@ import 'package:msf/features/websites/edit_webite.dart';
 import 'package:msf/features/websites/website_log.dart';
 import 'package:msf/features/websites/websites_screen.dart';
 
+import '../../features/system/manage_nginx_screen.dart';
+
 class AppRouter {
   static String loginRoute = "/login";
   static String homeRoute = "/home";
+  static String staticsRoute = "/statics";
   static String websiteRoute = "/websites";
   static String addWebsiteRoute = '/add_websites';
   static String websiteLogRoute = '/log_websites';
   static String editWebsiteRoute = '/edit_websites';
-  static String manageNginxRoute = '/manage_nginx';
+  static String manageWafRoute = '/manage_Waf';
   static String systemRoute = '/system_routes';
   static String activeConnectionRoute = '/active_connection';
   static String generalConfigurationRoute = '/general_confg';
@@ -37,7 +39,7 @@ class AppRouter {
   static String addUserManagmentRoute = '/add_management';
   static String addVirtualipRoute = '/add_virtualip';
   static String manageVirtualipRoute = '/manage_virtualip';
-  static String nginxLogRoute = '/nginx_log';
+  static String WafLogRoute = '/Waf_log';
   static String userActionLogRoute = '/user_actionlog';
   static String internalErrorLogRoute = '/internal_errorlog';
   static String mediaRoute = '/media';
@@ -45,13 +47,14 @@ class AppRouter {
   static String otpRoute = '/otp';
   static String docRoute = '/doc';
   static final appPages = [
+    GetPage(name: staticsRoute, page:()=> StatisticScreen()),
     GetPage(name: loginRoute, page: () => LoginScreen()),
     GetPage(name: homeRoute, page: () => HomeScreen()),
     GetPage(name: websiteRoute, page: () => const WebsitesScreen()),
-    GetPage(name: addWebsiteRoute, page: () => const AddWebsiteScreen()),
+    GetPage(name: addWebsiteRoute, page: () =>  AddWebsiteScreen()),
     GetPage(name: websiteLogRoute, page: () => const WebsitesLogScreen()),
     GetPage(name: editWebsiteRoute, page: () => const EditWebsite()),
-    GetPage(name: manageNginxRoute, page: () => const ManageNginxScreen()),
+    GetPage(name: manageWafRoute, page: () => const ManageWafScreen()),
     GetPage(
       name: activeConnectionRoute,
       page: () => const ActiveConnectionsScreen(),
@@ -67,7 +70,7 @@ class AppRouter {
     GetPage(
         name: manageVirtualipRoute, page: () => const ManageVirtualIPSCreen()),
     GetPage(name: systemRoute, page: () => const RoutesScreen()),
-    GetPage(name: nginxLogRoute, page: () => const NginxLogScreen()),
+    GetPage(name: WafLogRoute, page: () => const WafLogScreen()),
     GetPage(name: userActionLogRoute, page: () => const UserActionLogScreen()),
     GetPage(
         name: internalErrorLogRoute,

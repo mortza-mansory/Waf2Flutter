@@ -12,14 +12,14 @@ import 'package:msf/features/websites/components/data_column_tile.dart';
 import 'package:msf/features/websites/components/data_row_tile.dart';
 import 'package:msf/core/utills/responsive.dart';
 
-class ManageNginxScreen extends StatefulWidget {
-  const ManageNginxScreen({super.key});
+class ManageWafScreen extends StatefulWidget {
+  const ManageWafScreen({super.key});
 
   @override
-  State<ManageNginxScreen> createState() => _ManageNginxScreenState();
+  State<ManageWafScreen> createState() => _ManageWafScreenState();
 }
 
-class _ManageNginxScreenState extends State<ManageNginxScreen> {
+class _ManageWafScreenState extends State<ManageWafScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final Menu_Controller menuController = Get.find<Menu_Controller>();
   final ScrollController scrollbarController = ScrollController();
@@ -32,7 +32,7 @@ class _ManageNginxScreenState extends State<ManageNginxScreen> {
           mobile: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              nginxActions,
+              WafActions,
               const SizedBox(width: 10, height: 10),
               pendingAppSection
             ],
@@ -41,7 +41,7 @@ class _ManageNginxScreenState extends State<ManageNginxScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(flex: 2, child: nginxActions),
+              Expanded(flex: 2, child: WafActions),
               const SizedBox(width: 10, height: 10),
               Expanded(flex: 3, child: pendingAppSection),
             ],
@@ -50,7 +50,7 @@ class _ManageNginxScreenState extends State<ManageNginxScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(flex: 2, child: nginxActions),
+              Expanded(flex: 2, child: WafActions),
               const SizedBox(width: 10, height: 10),
               Expanded(flex: 3, child: pendingAppSection),
             ],
@@ -60,7 +60,7 @@ class _ManageNginxScreenState extends State<ManageNginxScreen> {
     );
   }
 
-  Widget get nginxActions {
+  Widget get WafActions {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -71,7 +71,7 @@ class _ManageNginxScreenState extends State<ManageNginxScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const AutoSizeText(
-            "Nginx Actions",
+            "Waf Actions",
             maxLines: 1,
           ),
           const SizedBox(height: 15),
@@ -143,7 +143,7 @@ class _ManageNginxScreenState extends State<ManageNginxScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const AutoSizeText(
-                      "Nginx Pending to preview",
+                      "Waf Pending to preview",
                       maxLines: 1,
                     ),
                     const SizedBox(height: 10),

@@ -11,12 +11,12 @@ class ExpertConfigTab extends StatefulWidget {
 }
 
 class _ExpertConfigTabState extends State<ExpertConfigTab> {
-  TextEditingController nginxTextController = TextEditingController();
+  TextEditingController WafTextController = TextEditingController();
   TextEditingController modsecurityTextController = TextEditingController();
 
   @override
   void dispose() {
-    nginxTextController.dispose();
+    WafTextController.dispose();
     modsecurityTextController.dispose();
     super.dispose();
   }
@@ -26,7 +26,7 @@ class _ExpertConfigTabState extends State<ExpertConfigTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        sectionMaker("Nginx Configuration", nginxTextController),
+        sectionMaker("Waf Configuration", WafTextController),
         const SizedBox(height: 15),
         sectionMaker("Modsecurity Configuration", modsecurityTextController),
         const SizedBox(height: 15),

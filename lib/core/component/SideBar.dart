@@ -44,10 +44,21 @@ class _SideBarState extends State<SideBar> {
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
+            ListTile(
+              onTap: () {
+                Get.toNamed("/statics");
+              },
+              leading: const Icon(Icons.wifi_tethering, color: Colors.white60),
+              title: AutoSizeText(
+                "Statistics".tr,
+                maxLines: 1,
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+            ),
             ExpansionPanelList.radio(
               initialOpenPanelValue: false,
               materialGapSize: 5,
-              elevation: 1,
+              elevation: 0,
               expansionCallback: (panelIndex, isExpanded) {
                 toggleExpansion(panelIndex);
               },
@@ -84,13 +95,13 @@ class _SideBarState extends State<SideBar> {
                   Icons.build,
                   [
                     ListTile(
-                      onTap: () => Get.toNamed(AppRouter.manageNginxRoute),
+                      onTap: () => Get.toNamed(AppRouter.manageWafRoute),
                       leading: Icon(
                         Icons.rocket_launch,
                         size: 20,
                       ),
                       title: AutoSizeText(
-                        "Manage Nginx".tr,
+                        "Manage Waf".tr,
                         maxLines: 1,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
@@ -122,11 +133,10 @@ class _SideBarState extends State<SideBar> {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Divider(
-                      color: Colors.black12,
-                      thickness: 1,
-                    ),
-                    SizedBox(height: 5),
+                    // Divider(
+                    //   color: Colors.black12,
+                    //   thickness: 1,
+                    // ),
                     ListTile(
                       onTap: () =>
                           Get.toNamed(AppRouter.generalConfigurationRoute),
@@ -202,11 +212,11 @@ class _SideBarState extends State<SideBar> {
                   Icons.padding,
                   [
                     ListTile(
-                      onTap: () => Get.toNamed(AppRouter.nginxLogRoute),
+                      onTap: () => Get.toNamed(AppRouter.WafLogRoute),
                       leading: const Icon(Icons.rocket_launch,
                           color: Colors.white60),
                       title: AutoSizeText(
-                        "Nginx Log".tr,
+                        "Waf Log".tr,
                         maxLines: 1,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
@@ -233,16 +243,7 @@ class _SideBarState extends State<SideBar> {
                 ),
               ],
             ),
-            ListTile(
-              onTap: () {},
-              leading: const Icon(Icons.speed_outlined, color: Colors.white60),
-              title: AutoSizeText(
-                "Statistics".tr,
-                maxLines: 1,
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
-            ),
-            SizedBox(height: 100),
+            SizedBox(height: 500),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -264,7 +265,6 @@ class _SideBarState extends State<SideBar> {
                 }),
               ],
             ),
-            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -297,8 +297,10 @@ class _SideBarState extends State<SideBar> {
   ExpansionPanelRadio expansionMaker(
           int index, String title, IconData titleIcon, List<Widget> children) =>
       ExpansionPanelRadio(
+        splashColor: null,
           value: index,
           canTapOnHeader: true,
+         highlightColor: null,
           backgroundColor: (expansionTiles[index] ?? false)
               ? Get.theme.scaffoldBackgroundColor
               : Theme.of(context).drawerTheme.backgroundColor,

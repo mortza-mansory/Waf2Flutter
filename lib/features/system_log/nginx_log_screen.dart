@@ -6,14 +6,14 @@ import 'package:msf/core/component/widgets/custom_iconbutton.dart';
 import 'package:msf/core/component/widgets/dashboard_textfield.dart';
 import 'package:msf/core/utills/colorconfig.dart';
 
-class NginxLogScreen extends StatefulWidget {
-  const NginxLogScreen({super.key});
+class WafLogScreen extends StatefulWidget {
+  const WafLogScreen({super.key});
 
   @override
-  State<NginxLogScreen> createState() => _NginxLogScreenState();
+  State<WafLogScreen> createState() => _WafLogScreenState();
 }
 
-class _NginxLogScreenState extends State<NginxLogScreen> {
+class _WafLogScreenState extends State<WafLogScreen> {
   TextEditingController searchTextController = TextEditingController();
   final ScrollController scrollbarController = ScrollController();
 
@@ -73,9 +73,9 @@ class _NginxLogScreenState extends State<NginxLogScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Enginx Logs"),
+                      const Text("EWaf Logs"),
                       const SizedBox(height: 15),
-                      Text("showing last ${_data.length} from nginx logs"),
+                      Text("showing last ${_data.length} from Waf logs"),
                     ],
                   ),
                   CustomIconbuttonWidget(

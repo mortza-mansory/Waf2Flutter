@@ -26,6 +26,6 @@ class ResourceUsageController extends GetxController {
       }
     });
     resourceUsage.refresh();
-    print("Updated data: $data");
+    //print("Updated data: $data");
   }
 }
