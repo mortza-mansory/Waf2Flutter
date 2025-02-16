@@ -9,6 +9,10 @@ import 'config/Config.dart';
 class HttpService {
   String? sessionId;
 
+  HttpService() {
+    HttpOverrides.global = MyHttpOverrides();
+  }
+
   Future<void> login(String username, String password) async {
     String url = '${Config.httpAddress}/login';
     try {
@@ -105,6 +109,7 @@ class HttpService {
       throw Exception('Error during app list request: $e');
     }
   }
+
   Future<List<Website>> fetchAppList() async {
     try {
       final url = Uri.parse('${Config.httpAddress}/app_list');
@@ -119,5 +124,111 @@ class HttpService {
       throw Exception('Error fetching applications: $e');
     }
   }
+}
+Future<bool> authenticateWaf(String username, String password) async {
+  String url = '${Config.httpAddress}/waf/auth/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'username': username, 'password': password}),
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    print("Error during WAF authentication: $e");
+    return false;
+  }
+}
 
+Future<bool> checkModSecurityStatus() async {
+  String url = '${Config.httpAddress}/waf/status/';
+  try {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return jsonData['mod_security_enabled'] ?? false;
+    }
+  } catch (e) {
+    print("Error checking ModSecurity status: $e");
+  }
+  return false;
+}
+
+Future<bool> toggleModSecurity(String power) async {
+  String url = '${Config.httpAddress}/waf/set_engine/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'username': 'test',
+        'password': 'test',
+        'power': power
+      }),
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    print("Error toggling ModSecurity: $e");
+    return false;
+  }
+}
+
+Future<bool> logUserAccess(String username) async {
+  String url = '${Config.httpAddress}/waf/log_user/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'username': username}),
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    print("Error logging user access: $e");
+    return false;
+  }
+}
+
+Future<List<dynamic>> fetchWafLogs() async {
+  String url = '${Config.httpAddress}/waf/show_audit_logs/';
+  try {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      print(jsonData);
+      var auditLogs = jsonData['audit_logs'] ?? [];
+      if (auditLogs is String) {
+        List<dynamic> decodedLogs = jsonDecode(auditLogs);
+        return decodedLogs;
+      } else if (auditLogs is List) {
+        return auditLogs;
+      }
+    }
+  } catch (e) {
+    print("Error fetching WAF logs: $e");
+  }
+  return [];
+}
+
+
+Future<bool> createNewRule(String ruleName, String ruleBody) async {
+  String url = '${Config.httpAddress}/waf/new_rule/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'rule': ruleName, 'body': ruleBody}),
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    print("Error creating new WAF rule: $e");
+    return false;
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
 }

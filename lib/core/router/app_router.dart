@@ -16,12 +16,13 @@ import 'package:msf/features/system/users/user_managment_screen.dart';
 import 'package:msf/features/system_log/internal_errorlog_screen.dart';
 import 'package:msf/features/system_log/nginx_log_screen.dart';
 import 'package:msf/features/system_log/user_actionlog_screen.dart';
+import 'package:msf/features/waf/waf_rule_screen.dart';
 import 'package:msf/features/websites/add_website_screen.dart';
 import 'package:msf/features/websites/edit_webite.dart';
 import 'package:msf/features/websites/website_log.dart';
 import 'package:msf/features/websites/websites_screen.dart';
 
-import '../../features/system/manage_nginx_screen.dart';
+import '../../features/waf/waf__manage_screen.dart';
 
 class AppRouter {
   static String loginRoute = "/login";
@@ -31,6 +32,8 @@ class AppRouter {
   static String addWebsiteRoute = '/add_websites';
   static String websiteLogRoute = '/log_websites';
   static String editWebsiteRoute = '/edit_websites';
+  static String wafRuleScreen = '/waf_rule';
+  static String wafManagerScreen = '/waf_manager';
   static String manageWafRoute = '/manage_Waf';
   static String systemRoute = '/system_routes';
   static String activeConnectionRoute = '/active_connection';
@@ -49,12 +52,13 @@ class AppRouter {
   static final appPages = [
     GetPage(name: staticsRoute, page:()=> StatisticScreen()),
     GetPage(name: loginRoute, page: () => LoginScreen()),
+    GetPage(name: wafRuleScreen, page: () => WafRuleScreen()),
+    GetPage(name: wafManagerScreen, page: () => WafManagerScreen()),
     GetPage(name: homeRoute, page: () => HomeScreen()),
     GetPage(name: websiteRoute, page: () => const WebsitesScreen()),
     GetPage(name: addWebsiteRoute, page: () =>  AddWebsiteScreen()),
     GetPage(name: websiteLogRoute, page: () => const WebsitesLogScreen()),
     GetPage(name: editWebsiteRoute, page: () => const EditWebsite()),
-    GetPage(name: manageWafRoute, page: () => const ManageWafScreen()),
     GetPage(
       name: activeConnectionRoute,
       page: () => const ActiveConnectionsScreen(),
@@ -70,7 +74,7 @@ class AppRouter {
     GetPage(
         name: manageVirtualipRoute, page: () => const ManageVirtualIPSCreen()),
     GetPage(name: systemRoute, page: () => const RoutesScreen()),
-    GetPage(name: WafLogRoute, page: () => const WafLogScreen()),
+    GetPage(name: WafLogRoute, page: () =>  WafLogScreen()),
     GetPage(name: userActionLogRoute, page: () => const UserActionLogScreen()),
     GetPage(
         name: internalErrorLogRoute,

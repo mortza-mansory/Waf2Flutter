@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:msf/core/bindings/bindings.dart';
 import 'package:get/get.dart';
@@ -8,7 +10,10 @@ import 'package:msf/core/services/unit/api/config/Config.dart';
 import 'package:msf/core/utills/theme.dart';
 import 'package:msf/core/utills/translator.dart';
 
+import 'core/services/unit/api/HttpService.dart';
+
 void main() async {
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await Config.loadConfig();
   Get.put(ThemeController());

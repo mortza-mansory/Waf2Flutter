@@ -1,6 +1,6 @@
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:flutter/material.dart';
 import 'config/Config.dart';
+import 'dart:io';
 
 class WebSocketService {
   WebSocketChannel? channel;
@@ -8,12 +8,19 @@ class WebSocketService {
 
   bool get isConnected => _isConnected;
 
+  void _setUpHttpOverrides() {
+    HttpOverrides.global = MyHttpOverrides();
+  }
+
   Future<bool> wsConnect(Function(String) onMessageReceived) async {
+    _setUpHttpOverrides();
+
     try {
-      channel = WebSocketChannel.connect(Uri.parse('${Config.websocketAddress}'));
+      final url = Uri.parse('${Config.websocketAddress}');
+      print("Connecting to WebSocket: $url");
+      channel = WebSocketChannel.connect(url);
       channel!.stream.listen(
             (message) {
-      //    print("Received data: $message");
           onMessageReceived(message);
         },
         onError: (error) {
@@ -22,7 +29,7 @@ class WebSocketService {
           channel?.sink.close();
         },
         onDone: () {
-     //     print("WebSocket connection closed.");
+          print("WebSocket connection closed.");
           _isConnected = false;
         },
       );
@@ -39,14 +46,20 @@ class WebSocketService {
   void sendMessage(String message) {
     if (_isConnected && channel != null) {
       channel!.sink.add(message);
-    //  print("Sent message: $message");
     } else {
-   //   print('Cannot send message: WebSocket is not connected.');
+      print('Cannot send message: WebSocket is not connected.');
     }
   }
 
   void closeConnection() {
     channel?.sink.close();
     _isConnected = false;
+  }
+}
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

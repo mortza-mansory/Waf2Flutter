@@ -89,23 +89,40 @@ class _SideBarState extends State<SideBar> {
                     ),
                   ],
                 ),
+
                 expansionMaker(
                   1,
-                  "System".tr,
-                  Icons.build,
+                  "WAF".tr,
+                  Icons.shield_outlined,
                   [
                     ListTile(
-                      onTap: () => Get.toNamed(AppRouter.manageWafRoute),
-                      leading: Icon(
-                        Icons.rocket_launch,
-                        size: 20,
-                      ),
+                      leading: const Icon(Icons.offline_bolt_outlined, color: Colors.white60),
+                      onTap: () => Get.toNamed(AppRouter.wafManagerScreen),
+
                       title: AutoSizeText(
-                        "Manage Waf".tr,
+                        "Waf Manager".tr,
+                        maxLines: 1,
+
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () => Get.toNamed(AppRouter.wafRuleScreen),
+                      leading: const Icon(Icons.add_box, color: Colors.white60),
+                      title: AutoSizeText(
+                        "Rule Manager".tr,
                         maxLines: 1,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
                     ),
+                  ],
+                ),
+
+                expansionMaker(
+                  2,
+                  "System".tr,
+                  Icons.build,
+                  [
                     ListTile(
                       onTap: () => Get.toNamed(AppRouter.systemRoute),
                       leading: const Icon(
@@ -137,6 +154,7 @@ class _SideBarState extends State<SideBar> {
                     //   color: Colors.black12,
                     //   thickness: 1,
                     // ),
+
                     ListTile(
                       onTap: () =>
                           Get.toNamed(AppRouter.generalConfigurationRoute),
@@ -180,7 +198,7 @@ class _SideBarState extends State<SideBar> {
                   ],
                 ),
                 expansionMaker(
-                  2,
+                  3,
                   "Interfaces".tr,
                   Icons.public,
                   [
@@ -207,7 +225,7 @@ class _SideBarState extends State<SideBar> {
                   ],
                 ),
                 expansionMaker(
-                  3,
+                  4,
                   "System Log".tr,
                   Icons.padding,
                   [

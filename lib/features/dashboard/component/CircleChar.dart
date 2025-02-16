@@ -3,7 +3,16 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:get/get.dart';
 
 class CircleChart extends StatelessWidget {
-  const CircleChart({super.key});
+  final Color circleColor;
+  final String mainText;
+  final String subText;
+
+  const CircleChart({
+    Key? key,
+    required this.circleColor,
+    required this.mainText,
+    required this.subText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +28,7 @@ class CircleChart extends StatelessWidget {
               sections: [
                 PieChartSectionData(
                   value: 1,
-                  color: Colors.greenAccent,
+                  color: circleColor,
                   showTitle: false,
                 ),
               ],
@@ -30,10 +39,10 @@ class CircleChart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Safe".tr,
+                  mainText.tr,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                Text("WAF is ON!".tr),
+                Text(subText.tr),
               ],
             ),
           ),

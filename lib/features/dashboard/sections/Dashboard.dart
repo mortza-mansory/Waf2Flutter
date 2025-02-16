@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msf/core/component/EndSection.dart';
+import 'package:msf/features/dashboard/component/RequestsBars.dart';
 import 'package:msf/features/dashboard/component/attacks_perapplication_table.dart';
 import 'package:msf/features/dashboard/component/Info_card_gridview.dart';
 import 'package:msf/features/dashboard/component/viewers_chart.dart';
@@ -31,7 +32,7 @@ class Dashboard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   Responsive(
                     mobile: InfoCardGridView(
@@ -50,14 +51,17 @@ class Dashboard extends StatelessWidget {
                     mobile: Padding(
                       padding: const EdgeInsets.only(top: 16),
                       child: AttacksPerApplicationTable(
-                        secondryColor: Theme.of(context).secondaryHeaderColor,
+                        secondryColor:
+                        Theme.of(context).secondaryHeaderColor,
                       ),
                     ),
                     tablet: AttacksPerApplicationTable(
-                      secondryColor: Theme.of(context).secondaryHeaderColor,
+                      secondryColor:
+                      Theme.of(context).secondaryHeaderColor,
                     ),
                     desktop: AttacksPerApplicationTable(
-                      secondryColor: Theme.of(context).secondaryHeaderColor,
+                      secondryColor:
+                      Theme.of(context).secondaryHeaderColor,
                     ),
                   ),
                   if (Responsive.isMobile(context))
@@ -84,10 +88,29 @@ class Dashboard extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const Responsive(
-          mobile: Viewers(),
-          tablet: Viewers(),
-          desktop: Viewers(),
+
+        Responsive(
+          mobile: Column(
+            children: const [
+              Viewers(),
+              SizedBox(height: 16),
+              RequestsBars(),
+            ],
+          ),
+          tablet: Row(
+            children: const [
+              Expanded(child: Viewers()),
+              SizedBox(width: 16),
+              Expanded(child: RequestsBars()),
+            ],
+          ),
+          desktop: Row(
+            children: const [
+              Expanded(child: Viewers()),
+              SizedBox(width: 16),
+              Expanded(child: RequestsBars()),
+            ],
+          ),
         ),
         const SizedBox(
           height: 16,

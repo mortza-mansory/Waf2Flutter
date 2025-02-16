@@ -1,0 +1,143 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:msf/core/component/page_builder.dart';
+import 'package:msf/core/component/widgets/custom_iconbutton.dart';
+import 'package:msf/features/controllers/settings/MenuController.dart';
+
+class WafRuleScreen extends StatelessWidget {
+  WafRuleScreen({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final Menu_Controller menuController = Get.find<Menu_Controller>();
+  final ScrollController scrollbarController = ScrollController();
+
+  final List<Map<String, dynamic>> ruleData = [
+    {
+      "ruleName": "REQUEST-901-INITIALIZATION",
+      "isEnabled": true,
+      "editAction": () {}
+    },
+    {
+      "ruleName": "REQUEST-902-CUSTOM-RULE",
+      "isEnabled": false,
+      "editAction": () {}
+    },
+    {
+      "ruleName": "REQUEST-903-OTHER-RULE",
+      "isEnabled": true,
+      "editAction": () {}
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return PageBuilder(
+      sectionWidgets:[
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSecondary,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text("Manage modesecurity rules and configuration"),
+              const SizedBox(height: 10),
+              DataTable(
+                columns: const [
+                  DataColumn(
+                    label: Text("CRS Configuration"),
+                  ),
+                  DataColumn(
+                    label: Text("Edit"),
+                  ),
+                ],
+                rows: [
+                  DataRow(
+                    cells: [
+                      const DataCell(
+                        Text("crs-setup.conf"),
+                      ),
+                      DataCell(
+                        SizedBox(
+                          width: 150,
+                          child: CustomIconbuttonWidget(
+                            title: "Edit configuration",
+                            icon: Icons.edit_square,
+                            backColor: Colors.yellow[100]!,
+                            titleColor: Colors.yellow[900]!,
+                            iconColor: Colors.yellow[900]!,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+              const Divider(color: Colors.blue, thickness: 3),
+              const SizedBox(height: 30),
+              DataTable(
+                columnSpacing: 16.0,
+                columns: const [
+                  DataColumn(
+                    label: Text(
+                      "Rule Name",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text("ON-Off"),
+                  ),
+                  DataColumn(
+                    label: Text("Edit Rule"),
+                  ),
+                ],
+                rows: ruleData
+                    .map(
+                      (data) => DataRow(
+                    cells: [
+                      DataCell(
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(minWidth: 150),
+                          child: Text(
+                            data['ruleName'],
+                            style: const TextStyle(fontSize: 14),
+                            softWrap: true,
+                          ),
+                        ),
+                      ),
+                      DataCell(
+                        Switch(
+                          activeTrackColor: Colors.blue,
+                          activeColor: Colors.white,
+                          inactiveTrackColor: Colors.red,
+                          value: data['isEnabled'],
+                          onChanged: (bool value) {},
+                        ),
+                      ),
+                      DataCell(
+                        SizedBox(
+                          width: 100,
+                          child: CustomIconbuttonWidget(
+                            title: "Edit Rules",
+                            icon: Icons.edit_square,
+                            backColor: Colors.green[200]!,
+                            titleColor: Colors.green[900]!,
+                            iconColor: Colors.green[900]!,
+                            onPressed: data['editAction'],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                    .toList(),
+              ),
+            ],
+                ),
+        ),]
+    );
+  }
+}
