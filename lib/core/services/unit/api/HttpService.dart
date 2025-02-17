@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:mime/mime.dart';
 import 'package:msf/core/models/website.dart';
 import 'config/Config.dart';
 
@@ -62,7 +61,8 @@ class HttpService {
           print("Unexpected response: ${jsonData['login_status']}");
         }
       } else {
-        print("OTP verification failed with status code: ${response.statusCode}");
+        print(
+            "OTP verification failed with status code: ${response.statusCode}");
       }
     } catch (e) {
       print("Error during OTP verification: $e");
@@ -70,7 +70,8 @@ class HttpService {
     return false;
   }
 
-  Future<http.Response> uploadFile(String? filePath, String applicationName, List<int> fileBytes) async {
+  Future<http.Response> uploadFile(
+      String? filePath, String applicationName, List<int> fileBytes) async {
     try {
       final uri = Uri.parse('${Config.httpAddress}/upload');
       final request = http.MultipartRequest('POST', uri);
@@ -125,6 +126,7 @@ class HttpService {
     }
   }
 }
+
 Future<bool> authenticateWaf(String username, String password) async {
   String url = '${Config.httpAddress}/waf/auth/';
   try {
@@ -160,11 +162,8 @@ Future<bool> toggleModSecurity(String power) async {
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'username': 'test',
-        'password': 'test',
-        'power': power
-      }),
+      body:
+          jsonEncode({'username': 'test', 'password': 'test', 'power': power}),
     );
     return response.statusCode == 200;
   } catch (e) {
@@ -209,6 +208,23 @@ Future<List<dynamic>> fetchWafLogs() async {
   return [];
 }
 
+Future<List<String>> fetchRules() async {
+  String url = '${Config.httpAddress}/waf/show_modsec_rules/';
+  try {
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return List<String>.from(data['modsec_rules']);
+    } else {
+      print("Failed to fetch rules: ${response.body}");
+      return [];
+    }
+  } catch (e) {
+    print("Error fetching WAF rules: $e");
+    return [];
+  }
+}
 
 Future<bool> createNewRule(String ruleName, String ruleBody) async {
   String url = '${Config.httpAddress}/waf/new_rule/';
@@ -216,7 +232,9 @@ Future<bool> createNewRule(String ruleName, String ruleBody) async {
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'rule': ruleName, 'body': ruleBody}),
+      body: jsonEncode({'rule': ruleName, 'body': ruleBody,
+      'username': 'test',
+      'password': 'test',}),
     );
     return response.statusCode == 200;
   } catch (e) {
@@ -225,10 +243,98 @@ Future<bool> createNewRule(String ruleName, String ruleBody) async {
   }
 }
 
+Future<String> getRuleContent(String ruleName) async {
+  String url = '${Config.httpAddress}/waf/load_rule/$ruleName';
+
+  try {
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['rule_content'] ?? 'No content found.';
+    } else {
+      return 'Error fetching rule content.';
+    }
+  } catch (e) {
+    return 'Error fetching rule content: $e';
+  }
+}
+
+Future<bool> updateRule(String ruleName, String ruleBody) async {
+  String url = '${Config.httpAddress}/waf/update_rule/$ruleName';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'username': 'test',
+        'password': 'test',
+        'body': ruleBody,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print("Failed to update rule: ${response.body}");
+      return false;
+    }
+  } catch (e) {
+    print("Error updating rule: $e");
+    return false;
+  }
+}
+Future<List<dynamic>> fetchRulesStatus() async {
+  String url = '${Config.httpAddress}/waf/rule/status';
+  try {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print(data);
+      return data['rules'];
+    } else {
+      print("Failed to fetch rule statuses: ${response.body}");
+      return [];
+    }
+  } catch (e) {
+    print("Error fetching rule statuses: $e");
+    return [];
+  }
+}
+
+Future<bool> toggleRuleStatus(String ruleName, String newStatus) async {
+  String url = '${Config.httpAddress}/waf/rule/enable_disable/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'username': 'test',
+        'password': 'test',
+        'rule': ruleName,
+        'status': newStatus,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print("Failed to toggle rule status: ${response.body}");
+      return false;
+    }
+  } catch (e) {
+    print("Error toggling rule status: $e");
+    return false;
+  }
+}
+
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

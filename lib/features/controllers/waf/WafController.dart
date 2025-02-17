@@ -103,7 +103,7 @@ class WafLogController extends GetxController {
     warningsCount.value = totalWarnings;
     criticalCount.value = totalCritical;
     messagesCount.value = totalMessages;
-    allCount.value = logs.length; // total logs count
+    allCount.value = logs.length;
   }
 
   void applyFilter() {
