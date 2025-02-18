@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:file_saver/file_saver.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:msf/core/models/website.dart';
@@ -90,6 +91,24 @@ class HttpService {
       throw Exception('Error during file upload: $e');
     }
   }
+  Future<bool> deleteRule(String ruleName) async {
+    String url = '${Config.httpAddress}/waf/delete_rule/';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'username': 'test',
+          'password': 'test',
+          'rule': ruleName,
+        }),
+      );
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Error deleting rule: $e");
+      return false;
+    }
+  }
 
   Future<http.Response> deployFile(String fileName) async {
     try {
@@ -125,6 +144,42 @@ class HttpService {
       throw Exception('Error fetching applications: $e');
     }
   }
+  Future<bool> restoreBackupRules() async {
+    String url = '${Config.httpAddress}/waf/restore_backup_rules/';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+      );
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Error restoring backup rules: $e");
+      return false;
+    }
+  }
+
+  Future<void> backupRules() async {
+    String url = '${Config.httpAddress}/waf/backup_rules/';
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final bytes = response.bodyBytes.buffer.asUint8List();
+        await FileSaver.instance.saveFile(
+          name: "rule_backup",
+          bytes: bytes,
+          ext: "zip",
+          customMimeType: "application/zip",
+        );
+      } else {
+        print("Failed to download backup: ${response.body}");
+      }
+    } catch (e) {
+      print("Error downloading backup rules: $e");
+    }
+  }
+
+
+
 }
 
 Future<bool> authenticateWaf(String username, String password) async {
@@ -138,6 +193,40 @@ Future<bool> authenticateWaf(String username, String password) async {
     return response.statusCode == 200;
   } catch (e) {
     print("Error during WAF authentication: $e");
+    return false;
+  }
+}
+
+
+//*-------Section for ----------------------------------------------------------------------
+
+Future<bool> logUserAccess(String username) async {
+  String url = '${Config.httpAddress}/waf/log_user/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'username': username}),
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    print("Error logging user access: $e");
+    return false;
+  }
+}
+
+Future<bool> toggleModSecurity(String power) async {
+  String url = '${Config.httpAddress}/waf/set_engine/';
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body:
+      jsonEncode({'username': 'test', 'password': 'test', 'power': power}),
+    );
+    return response.statusCode == 200;
+  } catch (e) {
+    print("Error toggling ModSecurity: $e");
     return false;
   }
 }
@@ -156,36 +245,6 @@ Future<bool> checkModSecurityStatus() async {
   return false;
 }
 
-Future<bool> toggleModSecurity(String power) async {
-  String url = '${Config.httpAddress}/waf/set_engine/';
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body:
-          jsonEncode({'username': 'test', 'password': 'test', 'power': power}),
-    );
-    return response.statusCode == 200;
-  } catch (e) {
-    print("Error toggling ModSecurity: $e");
-    return false;
-  }
-}
-
-Future<bool> logUserAccess(String username) async {
-  String url = '${Config.httpAddress}/waf/log_user/';
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'username': username}),
-    );
-    return response.statusCode == 200;
-  } catch (e) {
-    print("Error logging user access: $e");
-    return false;
-  }
-}
 
 Future<List<dynamic>> fetchWafLogs() async {
   String url = '${Config.httpAddress}/waf/show_audit_logs/';
@@ -328,6 +387,7 @@ Future<bool> toggleRuleStatus(String ruleName, String newStatus) async {
     return false;
   }
 }
+
 
 
 class MyHttpOverrides extends HttpOverrides {

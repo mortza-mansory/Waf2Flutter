@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msf/core/component/page_builder.dart';
-import 'package:msf/core/utills/responsive.dart';
-import 'package:msf/core/utills/colorconfig.dart';
 import 'package:msf/features/controllers/waf/WafRule.dart';
 import 'package:msf/core/component/widgets/dashboard_textfield.dart';
 
@@ -18,7 +16,6 @@ class AddNewRule extends StatelessWidget {
     return PageBuilder(sectionWidgets: [
       const SizedBox(height: 16),
 
-      // Title input container
       Container(
         padding: const EdgeInsets.all(16),
         alignment: Alignment.centerLeft,
@@ -63,7 +60,6 @@ class AddNewRule extends StatelessWidget {
 
       const SizedBox(height: 16),
 
-      // Content input container
       Container(
         padding: const EdgeInsets.all(16),
         alignment: Alignment.centerLeft,
@@ -77,7 +73,6 @@ class AddNewRule extends StatelessWidget {
             Text("Content of the rule", style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 10),
 
-            // DashboardTextfield for rule content
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
               decoration: BoxDecoration(
@@ -93,7 +88,6 @@ class AddNewRule extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Save button
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(

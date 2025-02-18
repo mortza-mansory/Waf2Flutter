@@ -6,7 +6,7 @@ class WafRuleController extends GetxController {
   var isLoading = false.obs;
   var selectedRuleContent = ''.obs;
   var searchQuery = "".obs;
-
+  HttpService httpService = HttpService();
   @override
   void onInit() {
     fetchWafRules();
@@ -30,7 +30,6 @@ class WafRuleController extends GetxController {
     isLoading.value = false;
     return success;
   }
-
 
   Future<void> fetchRuleContent(String ruleName) async {
     isLoading.value = true;
@@ -56,4 +55,30 @@ class WafRuleController extends GetxController {
     isLoading.value = false;
     return success;
   }
+
+  Future<void> downloadBackup() async {
+    await httpService.backupRules();
+  }
+
+  Future<bool> restoreBackup() async {
+    isLoading.value = true;
+    bool success = await httpService.restoreBackupRules();
+    if (success) {
+      await fetchWafRules();
+    }
+    isLoading.value = false;
+    return success;
+  }
+
+  Future<bool> deleteRule(String ruleName) async {
+    isLoading.value = true;
+    bool success = await httpService.deleteRule(ruleName);
+    if (success) {
+      await fetchWafRules();
+    }
+    isLoading.value = false;
+    return success;
+  }
+
+
 }
