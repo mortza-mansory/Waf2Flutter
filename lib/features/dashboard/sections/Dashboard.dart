@@ -32,7 +32,7 @@ class Dashboard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 20,
                   ),
                   Responsive(
                     mobile: InfoCardGridView(
@@ -50,27 +50,18 @@ class Dashboard extends StatelessWidget {
                   Responsive(
                     mobile: Padding(
                       padding: const EdgeInsets.only(top: 16),
-                      child: AttacksPerApplicationTable(
-                        secondryColor:
-                        Theme.of(context).secondaryHeaderColor,
-                      ),
+                      child: Viewers(),
                     ),
-                    tablet: AttacksPerApplicationTable(
-                      secondryColor:
-                      Theme.of(context).secondaryHeaderColor,
-                    ),
-                    desktop: AttacksPerApplicationTable(
-                      secondryColor:
-                      Theme.of(context).secondaryHeaderColor,
-                    ),
+                    tablet: Viewers(),
+                    desktop: Viewers(),
                   ),
                   if (Responsive.isMobile(context))
-                    const Padding(
-                      padding: EdgeInsets.only(top: 16),
+                     Padding(
+                      padding: EdgeInsets.only(top: 5),
                       child: StatusSection(),
                     ),
                   const SizedBox(
-                    height: 16,
+                    height: 10,
                   ),
                 ],
               ),
@@ -79,41 +70,45 @@ class Dashboard extends StatelessWidget {
               width: 16,
             ),
             if (!Responsive.isMobile(context))
-              const Expanded(
+               Expanded(
                 flex: 2,
                 child: StatusSection(),
               ),
           ],
         ),
         const SizedBox(
-          height: 10,
+          height: 5,
         ),
 
         Responsive(
           mobile: Column(
-            children: const [
-              Viewers(),
-              SizedBox(height: 16),
-              RequestsBars(),
+            children: [
+              QuickSummary(),
+              const SizedBox(height: 5),
+              const RequestsBars(),
             ],
           ),
           tablet: Row(
-            children: const [
-              Expanded(child: Viewers()),
+            children:  [
+              Expanded(
+                child: QuickSummary(),
+              ),
               SizedBox(width: 16),
               Expanded(child: RequestsBars()),
             ],
           ),
           desktop: Row(
-            children: const [
-              Expanded(child: Viewers()),
+            children:  [
+              Expanded(
+                child: QuickSummary(),
+              ),
               SizedBox(width: 16),
               Expanded(child: RequestsBars()),
             ],
           ),
         ),
         const SizedBox(
-          height: 16,
+          height: 20,
         ),
         const Responsive(
           mobile: EndSection(),
