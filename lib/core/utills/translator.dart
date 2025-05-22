@@ -19,6 +19,7 @@ class Translator extends Translations {
           'Time remaining:': 'Time remaining:',
           'admin1': 'admin1',
           'Error': 'Error',
+          'Quick Summary': 'Quick Summary',
           'Please fill the inputs correctly!': 'Please fill the inputs correctly!',
           'Login Successful!': 'Login Successful!',
           'Welcome dear test.': 'Welcome dear test.',
@@ -100,7 +101,18 @@ class Translator extends Translations {
           'Critical: ': 'بحرانی: ',
           'Safe': 'ایمن',
           'WAF is ON!': 'WAF فعال است!',
-          'Websites': 'وب سایت ها'
+          'Websites': 'وب سایت ها',
+          'Quick Summary': 'خلاصه فعالیت ها',
+          'Warnings': 'هشتار ها',
+          'Critical': 'بحرانی',
+          'Messages': 'پیغام ها',
+          'All Requests': 'تمام درخواست ها',
+          'Total Requests': 'همه ی درخواست ها',
+          'Most Requests Day': 'بیشترین درخواست روزانه',
+          'Todays Traffic': 'ترافیک امروز:',
+          'Unique IPs': 'ایپی یکتا:',
+          'Warnings: ': ':هشتار ها',
+          'Total Requests: ': 'همه درخواست های ارسال شده:',
         },
       };
 }
